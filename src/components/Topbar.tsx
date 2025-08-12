@@ -1,15 +1,21 @@
 "use client";
 
 import { ChevronLeft, Gem } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Menu from "./Menu/menu";
 import AnonymousMenu from "./Menu/anonymousMenu";
 import Notification from "./Notification";
+import useGoBack from "@/hooks/useGoBack";
 
 export default function TopBar() {
-  const accessToken = localStorage.getItem("accessToken");
+  const [accessToken, setAccessToken] = useState<string | null>(null);
 
-  const goBack = () => {};
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    setAccessToken(token);
+  }, []);
+
+  const goBack = useGoBack();
 
   useEffect(() => {
     const pathParts = location.pathname.split("/");
@@ -17,10 +23,9 @@ export default function TopBar() {
     if (!accessToken) {
       if (["teacher", "student"].includes(firstSegment)) {
         console.log(`firstSegment: ${firstSegment}`);
-        // navigate(`/auth/login`);
       }
     }
-  }, []);
+  }, [accessToken]);
 
   return (
     <div className="w-full border-b border-solid border-slate-200 px-4 py-4 dark:border-slate-600">

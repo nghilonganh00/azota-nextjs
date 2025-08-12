@@ -75,3 +75,4 @@ export interface INewHomework {
   classroomIds: number[];
   homeworkFiles: File[];
 }
+

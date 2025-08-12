@@ -144,3 +144,43 @@ export interface ICreateExam {
   examContent: object;
 }
 
+export interface IExamPreview extends IExam {
+  questionTotal: number;
+  examResultTotal: number;
+}
+
+export interface IStudentResult extends IExamResult {
+  id: number;
+  studentName: string;
+  classId: number;
+  examresStarted: string;
+  createdAt: string;
+  score: number;
+  questionTotal: number;
+  correctQuestionTotal: number;
+  ExamResults: IExamResult[];
+}
+
+export interface IAnswerOption {
+  Index: number;
+  Content: string;
+}
+
+export interface IExamAnswer {
+  Answered: number;
+  QuestionId: number;
+  AnswerContent: IAnswerOption[];
+}
+
+export interface IExamResultMark extends IExamResult {
+  score: number;
+  correctTotal: number;
+  questionTotal: number;
+}
+
+export interface IMarkedExamResult extends IExamResult {
+  score: number;
+  correctTotal: number;
+  correctQuestionIds: number[];
+  questionTotal: number;
+}

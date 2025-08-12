@@ -1,8 +1,6 @@
 import { AxiosResponse } from "axios";
 import { axiosInstance } from "../axiosInstance";
 
-const accessToken = localStorage.getItem("accessToken");
-
 const AuthAPI = {
   register: async (username: string, password: string, userFullName: string, userRole: string) => {
     try {
@@ -18,7 +16,6 @@ const AuthAPI = {
       const response = await axiosInstance.post(url, requestData, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
         },
       });
 
@@ -67,7 +64,6 @@ const AuthAPI = {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `${accessToken}`,
           },
         }
       );
@@ -89,7 +85,6 @@ const AuthAPI = {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `${accessToken}`,
           },
         }
       );
@@ -111,7 +106,6 @@ const AuthAPI = {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `${accessToken}`,
           },
         }
       );

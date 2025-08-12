@@ -16,17 +16,16 @@ interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
 let isRefreshing = false;
 let failedRequestsQueue: any[] = [];
 
-const token = localStorage.getItem("accessToken");
-
 export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
   },
 });
 
 axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+  const token = localStorage.getItem("accessToken");
+
   if (token && config.headers) {
     config.headers.Authorization = `Bearer ${token}`;
   }

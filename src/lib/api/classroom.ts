@@ -1,11 +1,10 @@
 import { AxiosResponse } from "axios";
 import { axiosInstance } from "../axiosInstance";
 
-const accessToken = localStorage.getItem("accessToken");
-
 export const ClassroomAPI = {
   getStudents: async (classId: string | number): Promise<AxiosResponse> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const response = await axiosInstance.get(`classrooms/${classId}/students`, {
         headers: {
           "Content-Type": "application/json",
@@ -29,6 +28,7 @@ export const ClassroomAPI = {
     searchKeyword?: string
   ): Promise<AxiosResponse> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const url = "classrooms/homeworks";
 
       const params = {
@@ -56,6 +56,7 @@ export const ClassroomAPI = {
 
   create: async (className: string, classYear: string, classGroupId?: number) => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const response = await axiosInstance.post(
         "classrooms",
         {

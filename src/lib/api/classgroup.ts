@@ -1,12 +1,11 @@
 import { AxiosResponse } from "axios";
 import { axiosInstance } from "../axiosInstance";
 
-const accessToken = localStorage.getItem("accessToken");
-
 const CLASSGROUP_API_URL = `classgroups`;
 
 const ClassGroupAPI = {
   getAll: async () => {
+    const accessToken = localStorage.getItem("accessToken");
     try {
       if (!accessToken) {
         throw new Error("User ID not found in localStorage.");
@@ -26,6 +25,7 @@ const ClassGroupAPI = {
   },
   getStudentClasseIds: async (examId: string | number): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const userId = localStorage.getItem("accessToken");
       if (!userId) {
         throw new Error("User ID not found in localStorage.");
@@ -46,6 +46,7 @@ const ClassGroupAPI = {
   },
   create: async (classgroupName: string): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) {
         throw new Error("User ID not found in localStorage.");
       }

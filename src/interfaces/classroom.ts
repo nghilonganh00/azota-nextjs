@@ -1,5 +1,5 @@
 import { IHomework, IHomeworkResult } from "./homework";
-import { IGender, IStudent } from "./user";
+import { Gender, IStudent } from "./user";
 
 export interface IGrade {
   id: string;
@@ -43,7 +43,7 @@ export interface IStudentClass {
   fullname: string;
   email: string;
   phone: string;
-  gender: IGender;
+  gender: Gender;
   DOB: Date;
   identificationNumber: string;
   confirmedAt: string;

@@ -1,13 +1,12 @@
 import { AxiosResponse } from "axios";
 import { axiosInstance } from "../axiosInstance";
 
-const accessToken = localStorage.getItem("accessToken");
-
 const EXAM_RESULT_API_URL = `exam-results`;
 
 const ExamResultAPI = {
   getDetailById: async (examResultId: string | number): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) {
         throw new Error("Access token not found in localStorage.");
       }
@@ -27,6 +26,7 @@ const ExamResultAPI = {
   },
   getMark: async (examResultId: string | number): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) {
         throw new Error("Access token not found in localStorage.");
       }
@@ -46,6 +46,7 @@ const ExamResultAPI = {
   },
   getReview: async (examResultId: string | number) => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) {
         throw new Error("User ID not found in localStorage.");
       }
@@ -67,6 +68,7 @@ const ExamResultAPI = {
   },
   getAnswer: async (examResultId: string | number): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) {
         throw new Error("User ID not found in localStorage.");
       }
@@ -83,11 +85,12 @@ const ExamResultAPI = {
       return response;
     } catch (error) {
       console.error(`Error in ExamResultAPI.getReview: ${error}`);
-      return null;    
+      return null;
     }
   },
   getHistory: async (examId: number, studentId: number): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) {
         throw new Error("Access token not found in localStorage.");
       }
@@ -108,7 +111,7 @@ const ExamResultAPI = {
   getLatestByExamAndClass: async (examId: number, classroomId?: number): Promise<AxiosResponse | null> => {
     try {
       const classroomIdParam = classroomId ?? -1;
-
+      const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) {
         throw new Error("User ID not found in localStorage.");
       }
@@ -130,13 +133,14 @@ const ExamResultAPI = {
   },
   getAssignedByClassLatest: async (examId: number, classId: number): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) {
         throw new Error("User ID not found in localStorage.");
       }
 
       const url = `exam-result/latest/assigned-by-class/${examId}/${classId}`;
 
-          const response = await axiosInstance.get(url, {
+      const response = await axiosInstance.get(url, {
         headers: {
           "Content-Type": "application/json",
           Authorization: accessToken,
@@ -151,6 +155,7 @@ const ExamResultAPI = {
   },
   create: async (hashId: string, answer: string, startedAt: string): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) {
         throw new Error("Access token not found in localStorage.");
       }
@@ -163,7 +168,7 @@ const ExamResultAPI = {
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
           },
-        },
+        }
       );
 
       return response;

@@ -12,7 +12,7 @@ const PublishExam = () => {
   // const { handleNotify, Popup } = usePopup();
 
   const [examConfig, setExamConfig] = useState<IExam>();
-  const examURL = `${process.env.REACT_APP_FRONTEND_URL}/exam/${hashId}`;
+  const examURL = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/exam/${hashId}`;
 
   const handleCopyHomeworkURL = (homeworkURL: string) => {
     navigator.clipboard.writeText(homeworkURL);

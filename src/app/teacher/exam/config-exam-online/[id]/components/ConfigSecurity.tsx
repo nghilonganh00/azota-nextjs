@@ -25,7 +25,7 @@ const ConfigSecurity: React.FC<ConfigSecurityProps> = (props) => {
           <div className="col-span-5">
             <input
               type="text"
-              // placeholder="Nhập tên ..."
+              placeholder="Nhập tên ..."
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm dark:border-none dark:bg-darkmode-800"
               // value={examName}
               // onChange={(e) => setExamName(e.target.value)}

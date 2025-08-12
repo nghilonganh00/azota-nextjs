@@ -8,7 +8,7 @@ import AuthAPI from "@/lib/api/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import UserAvatar from "../UserAvatar";
-import { IUser, IUserRole } from "@/interfaces";
+import { IUser, UserRole } from "@/interfaces";
 import extractNameEdges from "@/lib/utils/extractNameEdges";
 
 interface MenuItemProps {
@@ -57,7 +57,7 @@ const Menu = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const isTeacherView = window.location.pathname.startsWith("/teacher");
-  const isTeacher = user.role === IUserRole.TEACHER;
+  const isTeacher = user.role === UserRole.TEACHER;
 
   const handleRefresh = useCallback(() => {
     window.location.reload();

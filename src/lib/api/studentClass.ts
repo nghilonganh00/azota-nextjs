@@ -2,12 +2,12 @@ import { AxiosResponse } from "axios";
 import { axiosInstance } from "../axiosInstance";
 import { INewStudentClass } from "@/interfaces/studentClass";
 
-const accessToken = localStorage.getItem("accessToken");
 const STUDENT_CLASS_API_URL = `student-classes`;
 
 export const StudentClassroomAPI = {
   getSubmissionsByHomeworkId: async (homeworkId: string | number): Promise<AxiosResponse> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) {
         throw new Error("Access token not found in localStorage");
       }
@@ -27,6 +27,7 @@ export const StudentClassroomAPI = {
   },
   getByClassroomId: async (classroomId: string | number): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const response = await axiosInstance.get(`${STUDENT_CLASS_API_URL}/classroom/${classroomId}`, {
         headers: {
           "Content-Type": "application/json",
@@ -41,6 +42,7 @@ export const StudentClassroomAPI = {
   },
   identify: async (id: string | number): Promise<AxiosResponse> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) {
         throw new Error("Access token not found in localStorage");
       }
@@ -60,6 +62,7 @@ export const StudentClassroomAPI = {
 
   create: async (studentClass: INewStudentClass): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) {
         throw new Error("Access token not found in localStorage");
       }
@@ -80,6 +83,7 @@ export const StudentClassroomAPI = {
 
   createAnonymous: async (fullname: string): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const response = await axiosInstance.post(
         `${STUDENT_CLASS_API_URL}/anonymous`,
         { fullname },
@@ -96,6 +100,7 @@ export const StudentClassroomAPI = {
   },
   delete: async (id: string | number): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) {
         throw new Error("Access token not found in localStorage");
       }

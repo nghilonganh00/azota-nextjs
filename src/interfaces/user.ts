@@ -1,10 +1,10 @@
-export enum IUserRole {
+export enum UserRole {
   ADMIN = "ADMIN",
   TEACHER = "TEACHER",
   STUDENT = "STUDENT",
 }
 
-export enum IGender {
+export enum Gender {
   MALE = "Male",
   FEMALE = "Female",
   OTHER = "Other",
@@ -17,8 +17,8 @@ export interface IUser {
   DOB: string;
   phone: string;
   avatarURL: string;
-  role: IUserRole;
-  gender: IGender;
+  role: UserRole;
+  gender: Gender;
 }
 
 export interface ITeacher {
@@ -29,8 +29,8 @@ export interface ITeacher {
 export interface IStudent {
   id: number;
   fullname: string;
-  gender: IGender;
-  role: IUserRole;
+  gender: Gender;
+  role: UserRole;
   createdAt: string;
   updatedAt: string;
   confirmedAt: string;

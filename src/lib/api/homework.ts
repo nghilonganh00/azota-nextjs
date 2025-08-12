@@ -3,7 +3,6 @@ import { axiosInstance } from "../axiosInstance";
 import { IHomework, INewHomework } from "@/interfaces";
 import FirebaseStorage from "../firebaseStorage";
 
-const accessToken = localStorage.getItem("accessToken");
 const HOMEWORK_API_URL = `homeworks`;
 
 const HomeworkAPI = {
@@ -16,6 +15,7 @@ const HomeworkAPI = {
     searchKeyword?: string
   ): Promise<AxiosResponse> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const url = "homeworks";
 
       const params = {
@@ -41,6 +41,7 @@ const HomeworkAPI = {
   },
   getAllByClassId: async (classId: string): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) {
         throw new Error("User ID not found in localStorage.");
       }
@@ -61,6 +62,7 @@ const HomeworkAPI = {
   },
   getDetail: async (homeworkId: string): Promise<AxiosResponse> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const url = `homeworks/${homeworkId}`;
 
       const response = await axiosInstance.get(url, {
@@ -77,6 +79,7 @@ const HomeworkAPI = {
   },
   getByHashId: async (hashId: string): Promise<AxiosResponse> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const url = `homeworks/hash/${hashId}`;
 
       const response = await axiosInstance.get(url, {
@@ -92,6 +95,7 @@ const HomeworkAPI = {
   },
   getResultOfClass: async (homeworkId: string, classId: string) => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const url = `homework/${homeworkId}/homework-results`;
 
       const response = await axiosInstance.get(url, {
@@ -108,6 +112,7 @@ const HomeworkAPI = {
   },
   getSubmissionsById: async (homeworkId: number | string): Promise<AxiosResponse> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const url = `homeworks/${homeworkId}/submission`;
 
       const response = await axiosInstance.get(url, {
@@ -124,6 +129,7 @@ const HomeworkAPI = {
   },
   getClassWithHomework: async () => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const url = "homework/class";
 
       const response = await axiosInstance.get(url, {
@@ -139,6 +145,7 @@ const HomeworkAPI = {
   },
   getConfig: async (homeworkId: string) => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const url = `homeworks/${homeworkId}`;
 
       const response = await axiosInstance.get(url, {
@@ -155,6 +162,7 @@ const HomeworkAPI = {
 
   trash: async (homeworkId: string) => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const url = `homework/${homeworkId}/trash`;
 
       const response = await axiosInstance.get(url, {
@@ -172,6 +180,7 @@ const HomeworkAPI = {
 
   create: async (newHomework: INewHomework) => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const { homeworkFiles } = newHomework;
 
       const homeworkFileObj = await Promise.all(
@@ -203,6 +212,7 @@ const HomeworkAPI = {
 
   update: async (homework: IHomework): Promise<AxiosResponse> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const response = await axiosInstance.put(`${HOMEWORK_API_URL}/${homework.id}`, homework, {
         headers: {
           "Content-Type": "application/json",
@@ -218,6 +228,7 @@ const HomeworkAPI = {
 
   updateContent: async (homeworkId: string, content: string): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const response = await axiosInstance.patch(
         `${HOMEWORK_API_URL}/${homeworkId}/content`,
         { content },
@@ -238,6 +249,7 @@ const HomeworkAPI = {
 
   remove: async (homeworkId: string | number): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const response = await axiosInstance.delete(`${HOMEWORK_API_URL}/${homeworkId}`, {
         headers: {
           "Content-Type": "application/json",

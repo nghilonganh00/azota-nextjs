@@ -2,7 +2,6 @@ import { AxiosResponse } from "axios";
 import { axiosInstance } from "../axiosInstance";
 import { ICreateExam, IExam } from "@/interfaces/exam";
 
-const accessToken = localStorage.getItem("accessToken");
 const EXAM_API_URL = `exams`;
 
 const ExamAPI = {
@@ -15,10 +14,6 @@ const ExamAPI = {
     examContent,
   }: ICreateExam): Promise<AxiosResponse | null> => {
     try {
-      if (!accessToken) {
-        throw new Error("Access Token not found in localStorage.");
-      }
-
       const requestBody = {
         title: examName,
         gradeId,
@@ -31,7 +26,6 @@ const ExamAPI = {
       const response = await axiosInstance.post(`${EXAM_API_URL}`, requestBody, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
         },
       });
 
@@ -43,14 +37,9 @@ const ExamAPI = {
   },
   getAllConfigs: async (): Promise<AxiosResponse | null> => {
     try {
-      if (!accessToken) {
-        return null;
-      }
-
       const response = await axiosInstance.post("/exam/preview", {
         headers: {
           "Content-Type": "application/json",
-          Authorization: accessToken,
         },
       });
 
@@ -62,14 +51,9 @@ const ExamAPI = {
   },
   getPreviews: async (): Promise<AxiosResponse | null> => {
     try {
-      if (!accessToken) {
-        throw new Error("Access token not found in local storage");
-      }
-
       const response = await axiosInstance.get(`${EXAM_API_URL}/previews`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
         },
         params: {
           page: 1,
@@ -90,7 +74,6 @@ const ExamAPI = {
       const response = await axiosInstance.get(`${EXAM_API_URL}/${id}/config`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
         },
       });
 
@@ -118,14 +101,9 @@ const ExamAPI = {
 
   getContent: async (id: string): Promise<AxiosResponse | null> => {
     try {
-      if (!accessToken) {
-        throw new Error("Access token not found");
-      }
-
       const response = await axiosInstance.get(`${EXAM_API_URL}/${id}/content`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
         },
       });
 
@@ -141,7 +119,6 @@ const ExamAPI = {
       const response = await axiosInstance.get(`${EXAM_API_URL}/hash-id/${hashId}/content`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
         },
       });
 
@@ -165,7 +142,6 @@ const ExamAPI = {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
           },
         }
       );
@@ -179,16 +155,11 @@ const ExamAPI = {
 
   updatedConfigByHashId: async (exam: IExam) => {
     try {
-      if (!accessToken) {
-        throw new Error("User ID not found in localStorage.");
-      }
-
       const url = `exam/config/${exam.hashId}`;
 
       const response = await axiosInstance.put(url, exam, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: accessToken,
         },
       });
 
@@ -204,7 +175,6 @@ const ExamAPI = {
       const response = await axiosInstance.delete(`${EXAM_API_URL}/${id}`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
         },
       });
 
