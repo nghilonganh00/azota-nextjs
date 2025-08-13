@@ -263,6 +263,23 @@ const HomeworkAPI = {
       return null;
     }
   },
+
+  getMyUpcomingInClassroom: async (classroomId: string): Promise<AxiosResponse | null> => {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+      const response = await axiosInstance.get(`${HOMEWORK_API_URL}/classroom/${classroomId}/me/upcoming`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      return response;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  },
 };
 
 export default HomeworkAPI;

@@ -1,5 +1,5 @@
 import { IHomework, IHomeworkResult } from "./homework";
-import { Gender, IStudent } from "./user";
+import { Gender, IStudent, ITeacher } from "./user";
 
 export interface IGrade {
   id: string;
@@ -36,6 +36,7 @@ export interface IClassroom {
   studentClasses: IStudentClass[];
   createdAt: string;
   updatedAt: string;
+  teacher: ITeacher;
 }
 
 export interface IStudentClass {
