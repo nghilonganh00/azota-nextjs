@@ -6,7 +6,10 @@ export default function HomeworkCard({ homework }: { homework: IHomework }) {
   const router = useRouter();
 
   return (
-    <button className="flex h-24 items-center justify-center" onClick={() => router.push("")}>
+    <button
+      className="flex h-24 items-center justify-center hover:cursor-pointer"
+      onClick={() => router.push(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/homework/${homework.hashId}`)}
+    >
       <div className="flex h-full w-24 items-center justify-center rounded-l-md bg-slate-300 text-sm font-semibold shadow-sm">
         Chưa nộp
       </div>
@@ -30,7 +33,6 @@ export default function HomeworkCard({ homework }: { homework: IHomework }) {
         <div className="flex gap-2 text-xs text-gray-500">
           <div>Hạn cuối:</div>
           <div className="font-semibold text-red-500">
-            {" "}
             {isoDateUtil.toDateAndTime(homework.endDate, DateTimeFormat.FULL_DATE_TIME_FORMAT)}
           </div>
         </div>

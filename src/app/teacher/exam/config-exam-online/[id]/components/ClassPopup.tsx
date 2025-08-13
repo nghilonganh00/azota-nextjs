@@ -13,7 +13,7 @@ interface ClassroomPopupProps {
 }
 
 const ClassroomPopup: React.FC<ClassroomPopupProps> = (props) => {
-  const { examId } = useParams<{ examId: string }>();
+  const { id: examId } = useParams<{ id: string }>();
 
   const { classroom, assignedStudentIds, setAssignedStudentIds } = props;
 
@@ -38,6 +38,14 @@ const ClassroomPopup: React.FC<ClassroomPopupProps> = (props) => {
   const assignedStudenTotal = assignedStudentIds?.filter((assignedStudentId) =>
     classroom.studentClasses.map((student) => student.id).includes(assignedStudentId)
   ).length;
+
+  const handleSelectAll = (checked: boolean) => {
+    if (checked) {
+      setAssignedStudentIdsDraft(students.map((student: IStudent) => student.id));
+    } else {
+      setAssignedStudentIdsDraft([]);
+    }
+  };
 
   useEffect(() => {
     const fetchStudentExamAssignmentsData = async () => {
@@ -80,7 +88,7 @@ const ClassroomPopup: React.FC<ClassroomPopupProps> = (props) => {
 
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-1">
-                    <input type="checkbox" className="size-4" />
+                    <input type="checkbox" className="size-4" onChange={(e) => handleSelectAll(e.target.checked)} />
                     <label htmlFor="" className="text-sm">
                       Chọn tất cả
                     </label>

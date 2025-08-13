@@ -2,13 +2,12 @@ import { AxiosResponse } from "axios";
 import { axiosInstance } from "../axiosInstance";
 import FirebaseStorage from "../firebaseStorage";
 
-
-const accessToken = localStorage.getItem("accessToken");
 const HOMEWORK_SUBMISSION_API_URL = `homework-submissions`;
 
 export const HomeworkSubmissionAPI = {
   getDetail: async (homeworkSubmissionId: string): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const url = `${HOMEWORK_SUBMISSION_API_URL}/${homeworkSubmissionId}`;
 
       const response = await axiosInstance.get(url, {
@@ -26,6 +25,7 @@ export const HomeworkSubmissionAPI = {
   },
   getByHomeworkHashId: async (hashId: string, studentClassId: string): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const url = `${HOMEWORK_SUBMISSION_API_URL}/homework/${hashId}/student-class/${studentClassId}`;
 
       const response = await axiosInstance.get(url, {
@@ -43,6 +43,7 @@ export const HomeworkSubmissionAPI = {
   },
   getByHashIdAndStudentClassId: async (hashId: string, studentClassId: string): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const url = `${HOMEWORK_SUBMISSION_API_URL}/homework/${hashId}/student-class/${studentClassId}`;
 
       const response = await axiosInstance.get(url, {
@@ -60,6 +61,7 @@ export const HomeworkSubmissionAPI = {
   },
   getStatus: async (homeworkId: string): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const url = `${HOMEWORK_SUBMISSION_API_URL}/status/homework/${homeworkId}`;
 
       const response = await axiosInstance.get(url, {
@@ -77,6 +79,7 @@ export const HomeworkSubmissionAPI = {
   },
   submit: async (homeworkSubmissionId: string, files: File[]): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const fileObj = await Promise.all(
         files.map(async (file) => {
           const uploadFile = await FirebaseStorage.upload(file);
@@ -84,7 +87,7 @@ export const HomeworkSubmissionAPI = {
             title: uploadFile.filename,
             link: uploadFile.downloadURL,
           };
-        }),
+        })
       );
 
       const url = `${HOMEWORK_SUBMISSION_API_URL}/${homeworkSubmissionId}/submit`;
@@ -97,7 +100,7 @@ export const HomeworkSubmissionAPI = {
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
           },
-        },
+        }
       );
 
       return response;
@@ -110,9 +113,10 @@ export const HomeworkSubmissionAPI = {
     homeworkSubmissionId: string,
     comment: string,
     point: string,
-    isShowPoint: boolean,
+    isShowPoint: boolean
   ): Promise<AxiosResponse | null> => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
       const url = `${HOMEWORK_SUBMISSION_API_URL}/${homeworkSubmissionId}/mark`;
 
       const response = await axiosInstance.patch(
@@ -123,7 +127,7 @@ export const HomeworkSubmissionAPI = {
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
           },
-        },
+        }
       );
 
       return response;
@@ -135,7 +139,7 @@ export const HomeworkSubmissionAPI = {
   requestResend: async (homeworkSubmissionId: string): Promise<AxiosResponse | null> => {
     try {
       const url = `${HOMEWORK_SUBMISSION_API_URL}/${homeworkSubmissionId}/request-resend`;
-
+      const accessToken = localStorage.getItem("accessToken");
       const response = await axiosInstance.patch(
         url,
         {},
@@ -144,7 +148,7 @@ export const HomeworkSubmissionAPI = {
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
           },
-        },
+        }
       );
 
       return response;
