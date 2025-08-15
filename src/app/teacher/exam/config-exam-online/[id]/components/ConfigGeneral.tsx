@@ -10,6 +10,8 @@ interface ConfigGeneralProp {
   assignedStudentIds: number[];
   setAssignedStudentIds: React.Dispatch<React.SetStateAction<number[]>>;
   handleChangeConfig: (name: string, newValue: any) => void;
+  errors: { [key: string]: string };
+  setErrors: React.Dispatch<React.SetStateAction<{ [key: string]: string }>>;
 }
 
 const ConfigGeneral: React.FC<ConfigGeneralProp> = (props) => {
@@ -20,11 +22,11 @@ const ConfigGeneral: React.FC<ConfigGeneralProp> = (props) => {
     assignedStudentIds,
     setAssignedStudentIds,
     handleChangeConfig,
+    errors,
+    setErrors,
   } = props;
 
   const { type, title, gradeId, subjectId, purposeId, duration } = examConfig;
-
-  console.log("end date: ", examConfig.endDate);
 
   return (
     <div className="rounded-md bg-white px-5 py-6 text-gray-800 shadow dark:bg-darkmode-600 dark:text-slate-300">
@@ -43,6 +45,7 @@ const ConfigGeneral: React.FC<ConfigGeneralProp> = (props) => {
               onChange={(e) => handleChangeConfig("title", e.target.value)}
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm dark:border-none dark:bg-darkmode-800"
             />
+            {errors.title && <p className="text-red-500 text-xs">{errors.title}</p>}
           </div>
 
           <CategoryForm
@@ -115,6 +118,7 @@ const ConfigGeneral: React.FC<ConfigGeneralProp> = (props) => {
 
               <div className="col-span-12 mt-1 text-xs text-slate-500 dark:text-slate-400">
                 Bỏ trống nếu không muốn giới hạn thời gian.
+                {errors.date && <p className="text-red-500 text-xs">{errors.date}</p>}
               </div>
             </div>
           )}

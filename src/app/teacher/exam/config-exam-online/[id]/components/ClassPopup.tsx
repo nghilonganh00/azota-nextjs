@@ -18,11 +18,16 @@ const ClassroomPopup: React.FC<ClassroomPopupProps> = (props) => {
   const { classroom, assignedStudentIds, setAssignedStudentIds } = props;
 
   const [assignedStudentIdsDraft, setAssignedStudentIdsDraft] = useState<number[]>([] as number[]);
+  const [showOnlySelected, setShowOnlySelected] = useState<boolean>(false);
 
   const { className } = classroom;
 
   const [isOpenPopup, setOpenPopup] = useState<boolean>(false);
   const [students, setStudents] = useState<IStudent[]>([]);
+
+  const filteredStudents = showOnlySelected
+    ? students.filter((student) => assignedStudentIdsDraft.includes(student.id))
+    : students;
 
   const handleAssignStudentInDraft = (studentId: number) => {
     setAssignedStudentIdsDraft((preValue) =>
@@ -38,6 +43,10 @@ const ClassroomPopup: React.FC<ClassroomPopupProps> = (props) => {
   const assignedStudenTotal = assignedStudentIds?.filter((assignedStudentId) =>
     classroom.studentClasses.map((student) => student.id).includes(assignedStudentId)
   ).length;
+
+  const handleShowOnlySelected = (checked: boolean) => {
+    setShowOnlySelected(checked);
+  };
 
   const handleSelectAll = (checked: boolean) => {
     if (checked) {
@@ -88,15 +97,25 @@ const ClassroomPopup: React.FC<ClassroomPopupProps> = (props) => {
 
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-1">
-                    <input type="checkbox" className="size-4" onChange={(e) => handleSelectAll(e.target.checked)} />
-                    <label htmlFor="" className="text-sm">
+                    <input
+                      id="select-all"
+                      type="checkbox"
+                      className="size-4"
+                      onChange={(e) => handleSelectAll(e.target.checked)}
+                    />
+                    <label htmlFor="select-all" className="text-sm">
                       Chọn tất cả
                     </label>
                   </div>
 
                   <div className="flex items-center gap-1">
-                    <input type="checkbox" className="size-4" />
-                    <label htmlFor="" className="text-sm">
+                    <input
+                      id="show-selected-student"
+                      type="checkbox"
+                      className="size-4"
+                      onChange={(e) => handleShowOnlySelected(e.target.checked)}
+                    />
+                    <label htmlFor="show-selected-student" className="text-sm">
                       Học sinh đã chọn
                     </label>
                   </div>
@@ -106,16 +125,17 @@ const ClassroomPopup: React.FC<ClassroomPopupProps> = (props) => {
 
             <div className="bg-white p-3 pt-5 dark:bg-darkmode-600">
               <div className="grid grid-cols-12 gap-y-4 rounded-b-md">
-                {students?.map((student) => (
+                {filteredStudents?.map((student) => (
                   <div className="col-span-4" key={student.id}>
                     <div className="flex items-center gap-1">
                       <input
+                        id={`student-${student.id}`}
                         type="checkbox"
                         className="size-4"
-                        defaultChecked={assignedStudentIds?.includes(student.id)}
+                        checked={assignedStudentIdsDraft?.includes(student.id)}
                         onChange={() => handleAssignStudentInDraft(student.id)}
                       />
-                      <label htmlFor="" className="text-sm">
+                      <label htmlFor={`student-${student.id}`} className="text-sm">
                         {student.fullname}
                       </label>
                     </div>

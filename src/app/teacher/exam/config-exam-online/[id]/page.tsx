@@ -18,6 +18,7 @@ export default function ConfigExamOnline() {
   const { id: examId } = useParams<{ id: string }>();
 
   const [examConfig, setExamConfig] = useState<IExam>({} as IExam);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [assignedClassIds, setAssignedClassIds] = useState<number[]>([]);
   const [assignedStudentIds, setAssignedStudentIds] = useState<number[]>([]);
 
@@ -25,7 +26,30 @@ export default function ConfigExamOnline() {
     setExamConfig((preValue) => ({ ...preValue, [name]: newValue }));
   };
 
+  const validateForm = () => {
+    let valid = true;
+    const newErrors: { [key: string]: string } = {};
+
+    if (!examConfig.title || examConfig.title.trim() === "") {
+      newErrors.title = "Tiêu đề bài thi không được để trống";
+      valid = false;
+    }
+
+    if (!examConfig.startDate || !examConfig.endDate) {
+      newErrors.date = "Ngày giao đề và hạn thi không được để trống";
+      valid = false;
+    }
+
+    setErrors(newErrors);
+
+    return valid;
+  };
+
   const handlePublish = async () => {
+    const isValid = validateForm();
+
+    if (!isValid) return;
+
     if (!examId) return;
 
     const response: any = await ExamAPI.publish(examId, examConfig, assignedStudentIds, assignedClassIds);
@@ -65,6 +89,8 @@ export default function ConfigExamOnline() {
             assignedStudentIds={assignedStudentIds}
             setAssignedStudentIds={setAssignedStudentIds}
             handleChangeConfig={handleChangeConfig}
+            errors={errors}
+            setErrors={setErrors}
           />
 
           {examConfig.examType === "TEST" && (
