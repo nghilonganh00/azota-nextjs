@@ -60,7 +60,7 @@ const PublishHomework = () => {
                   <input
                     type="text"
                     readOnly
-                    value={`${process.env.NEXT_PUBLIC_FRONTEND_URL}/homework/${homework?.hashId}`}
+                    value={`${window.location.origin}/homework/${homework?.hashId}`}
                     className="flex-1 bg-transparent"
                   />
 
@@ -69,7 +69,7 @@ const PublishHomework = () => {
 
                     <div
                       onClick={() => {
-                        handleCopyHomeworkURL(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/homework/${homework?.hashId}`);
+                        handleCopyHomeworkURL(`${window.location.origin}/homework/${homework?.hashId}`);
                       }}
                       className="text-sm font-semibold"
                     >

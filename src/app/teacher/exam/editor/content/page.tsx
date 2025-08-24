@@ -6,34 +6,40 @@ import ListQuestionPanel from "./components/listQuestionPanel";
 import EditorCode from "./components/editorCode";
 import convertToJSON from "./lib/util/formatExam";
 import { ExamJSON } from "./lib/interface";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 const Editor = () => {
-  const savedEditorValue = localStorage.getItem("exam") ?? "";
-  const [editorValue, setEditorValue] = useState(savedEditorValue);
+  const [editorValue, setEditorValue] = useState<string>("");
   const [examJSON, setExamJSON] = useState<ExamJSON>({} as ExamJSON);
-  console.log("examJSON: ", examJSON);
   const [goToLine, setGoToLine] = useState<number>(1);
+
+  const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  const [savedEditorValue, setSavedEditorValue, ready] = useLocalStorage<string>("exam", "");
 
   const handleGoToLine = (line: number) => {
     setGoToLine(line);
   };
 
-  const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
+  useEffect(() => {
+    if (ready) setEditorValue(savedEditorValue);
+  }, [ready, savedEditorValue]);
 
   useEffect(() => {
-    const handleCovertEditorIntoJSON = () => {
-      const covertedExamJSON: ExamJSON = convertToJSON(editorValue);
-      setExamJSON(covertedExamJSON);
-      localStorage.setItem("exam", editorValue);
+    if (!ready) return;
+
+    const updateAndSave = () => {
+      const convertedExamJSON: ExamJSON = convertToJSON(editorValue);
+      setExamJSON(convertedExamJSON);
+
+      setSavedEditorValue(editorValue);
     };
 
     if (debounceTimeout.current) {
       clearTimeout(debounceTimeout.current);
     }
 
-    debounceTimeout.current = setTimeout(() => {
-      handleCovertEditorIntoJSON();
-    }, 1000);
+    debounceTimeout.current = setTimeout(updateAndSave, 1000);
 
     return () => {
       if (debounceTimeout.current) {
@@ -42,7 +48,7 @@ const Editor = () => {
     };
   }, [editorValue]);
 
-  console.log("exam: ", examJSON);
+  if (!ready) return null;
 
   return (
     <div className="grid grid-cols-12">

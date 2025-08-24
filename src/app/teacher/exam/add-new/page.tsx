@@ -41,7 +41,7 @@ export default function AddExam() {
         <div className="col-span-4 space-y-6">
           <div className="space-y-1">
             <Link
-              href={"/teacher/exam/editor"}
+              href={"/teacher/exam/editor/content"}
               className="flex items-center gap-4 rounded-md bg-white p-5 shadow-sm dark:bg-darkmode-600"
             >
               <SquarePen className="size-8 text-orange-600" strokeWidth={1.5} />

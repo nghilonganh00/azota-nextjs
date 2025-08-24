@@ -4,15 +4,16 @@ import { useEffect, useState, useCallback } from "react";
 import Menu from "./Menu/menu";
 import { useRouter } from "next/navigation";
 import { useNotification } from "@/context/notificationContext";
-import convertToJSON from "@/app/teacher/exam/editor/lib/util/formatExam";
+import convertToJSON from "@/app/teacher/exam/editor/content/lib/util/formatExam";
 import Link from "next/link";
 import { Bell } from "lucide-react";
 import Image from "next/image";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 // Constants
 const LOGO_URL = "https://239114911.e.cdneverest.net/cdnazota/storage_public/azota_assets/images/logo.svg";
 const FLAG_URL = "https://239114911.e.cdneverest.net/cdnazota/storage_public/azota_assets/flag/vi.svg";
-const EDITOR_PATH = "/teacher/exam/editor";
+const EDITOR_PATH = "/teacher/exam/editor/content";
 const CREATE_PATH = "/teacher/exam/editor/create";
 
 // Error messages
@@ -42,8 +43,11 @@ export default function EditorTopBar() {
   const [examName, setExamName] = useState("");
   const [openExamNameInput, setOpenExamNameInput] = useState(true);
 
-  // Memoized exam data
-  const examJSON: ExamJSON | null = convertToJSON(localStorage.getItem("exam") || "");
+  const [examString] = useLocalStorage<string | null>("exam", null);
+
+  const examJSON: ExamJSON | null = examString ? convertToJSON(examString) : null;
+
+  const [storedExamName, setStoredExamName, ready] = useLocalStorage<string>("exam_config", "");
 
   // Validation function
   const validateExamAnswers = useCallback((exam: ExamJSON): boolean => {
@@ -78,7 +82,7 @@ export default function EditorTopBar() {
       return;
     }
 
-    localStorage.setItem("exam_config", examName);
+    setStoredExamName(examName);
     router.push(CREATE_PATH);
   }, [examName, examJSON, router, validateExamAnswers, addNotification]);
 
@@ -137,18 +141,14 @@ export default function EditorTopBar() {
   const renderActions = () => (
     <div className="col-span-4">
       <div className="flex items-center justify-end gap-5 pr-2">
-        <Image
-          src={FLAG_URL} 
-          alt="Vietnamese Flag"
-          width={20}
-          height={20}
-          className="h-5 w-auto"
-        />
+        <Image src={FLAG_URL} alt="Vietnamese Flag" width={20} height={20} className="h-5 w-auto" />
         <Bell className="size-5 text-slate-600 dark:text-slate-400" />
         <Menu />
       </div>
     </div>
   );
+
+  if (!ready) return null;
 
   return (
     <>

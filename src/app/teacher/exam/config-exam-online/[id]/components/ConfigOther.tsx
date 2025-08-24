@@ -1,3 +1,5 @@
+"use client";
+
 import { Editor } from "@tinymce/tinymce-react";
 import { useState, useRef } from "react";
 import { Editor as TinyMCEEditor } from "tinymce";

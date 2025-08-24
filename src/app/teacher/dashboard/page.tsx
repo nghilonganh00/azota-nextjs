@@ -1,3 +1,5 @@
+"use client";
+
 import { BookOpen, CircleAlert, CircleHelp, FileText, Folder, Layers, Trash2, Users } from "lucide-react";
 import Link from "next/link";
 

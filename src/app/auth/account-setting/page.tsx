@@ -6,7 +6,8 @@ import { AccountSettingTabs } from "./utils/constant";
 import TabList from "./components/TabList";
 import TabPanels from "./components/TabPanels";
 
-const AccountSetting = () => {
+// Tách phần logic ra component riêng, component này dùng useSearchParams
+const AccountSettingContent = () => {
   const searchParams = useSearchParams();
   const tabId = searchParams.get("tabId");
 
@@ -36,15 +37,21 @@ const AccountSetting = () => {
   }, [tabId]);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div className="px-4 py-5 dark:text-slate-300">
-        <div className="mb-6 text-lg font-semibold">Cài đặt tài khoản</div>
-        <div className="grid grid-cols-12 gap-4">
-          <TabList selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-
-          <TabPanels selectedTab={selectedTab} />
-        </div>
+    <div className="px-4 py-5 dark:text-slate-300">
+      <div className="mb-6 text-lg font-semibold">Cài đặt tài khoản</div>
+      <div className="grid grid-cols-12 gap-4">
+        <TabList selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+        <TabPanels selectedTab={selectedTab} />
       </div>
+    </div>
+  );
+};
+
+// Component chính bọc bằng Suspense
+const AccountSetting = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AccountSettingContent />
     </Suspense>
   );
 };

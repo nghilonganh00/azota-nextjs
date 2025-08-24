@@ -4,6 +4,8 @@ import { useRef, useEffect, forwardRef, useImperativeHandle } from "react";
 import MonacoEditor from "react-monaco-editor";
 import * as monaco from "monaco-editor";
 import { options } from "../lib/editorConfig";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import dynamic from "next/dynamic";
 
 interface AzotaEditorProps {
   value: string;
@@ -18,6 +20,7 @@ export interface AzotaEditorHandle {
 const AzotaEditor = forwardRef<AzotaEditorHandle, AzotaEditorProps>((props, ref) => {
   const { value, setValue, goToLine } = props;
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
+  const [examLocalStorage, setExamLocalStorage, ready] = useLocalStorage<string>("exam", "");
 
   useImperativeHandle(ref, () => ({
     insertTextAtCursor: (text: string) => {
@@ -57,7 +60,7 @@ const AzotaEditor = forwardRef<AzotaEditorHandle, AzotaEditorProps>((props, ref)
 
   const handleEditorChange = (value: string) => {
     setValue(value);
-    localStorage.setItem("exam", value);
+    setExamLocalStorage(value);
   };
 
   const editorWillMount = () => {
@@ -96,6 +99,8 @@ const AzotaEditor = forwardRef<AzotaEditorHandle, AzotaEditorProps>((props, ref)
       });
     }
   };
+
+  if (!ready) return null;
 
   return (
     <MonacoEditor

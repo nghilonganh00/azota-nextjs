@@ -1,9 +1,11 @@
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { StudentClassroomAPI } from "@/lib/api/studentClass";
 import { OctagonAlert } from "lucide-react";
 import { useState } from "react";
 
 export const CreateAnonymousLayout = () => {
   const [fullName, setFullname] = useState<string>("");
+  const [studentClassId, setStudentClassId] = useLocalStorage<string | null>("studentClassId", null);
 
   const handleCreate = async () => {
     if (!fullName) return;
@@ -12,7 +14,7 @@ export const CreateAnonymousLayout = () => {
 
     if (response?.status !== 201) return;
 
-    localStorage.setItem("studentClassId", response.data.id);
+    setStudentClassId(response.data.id);
   };
 
   return (

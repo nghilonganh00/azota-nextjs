@@ -2,8 +2,8 @@
 
 import { ICreateExam } from "@/interfaces/exam";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import convertToJSON from "../lib/util/formatExam";
+import { useEffect, useMemo, useState } from "react";
+import convertToJSON from "../content/lib/util/formatExam";
 import ExamAPI from "@/lib/api/exam";
 import Head from "next/head";
 import ExamNameConfig from "./components/examNameConfig";
@@ -11,21 +11,36 @@ import GradeDropdown from "./components/gradeDropdown";
 import SubjectDropdown from "./components/subjectDropdown";
 import PurposeDropdown from "./components/purposeDropdown";
 import { Tab } from "@/interfaces";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 export default function CreateExam() {
   const router = useRouter();
 
   const [newExam, setNewExam] = useState<ICreateExam>({
-    examName: localStorage.getItem("exam_config") || "",
+    examName: "",
     gradeId: "",
     subjectId: "",
     purposeId: "",
     examDescribe: "",
-    examContent: convertToJSON(localStorage.getItem("exam") || ""),
+    examContent: {},
   });
+
   const [selectedGrade, setSelectedGrade] = useState<Tab | null>(null);
   const [selectedSubject, setSelectedSubject] = useState<Tab | null>(null);
   const [selectedPurpose, setSelectedPurpose] = useState<Tab | null>(null);
+
+  const [examName] = useLocalStorage<string>("exam_config", "");
+  const [examRaw] = useLocalStorage<string>("exam", "");
+
+  const examContent = useMemo(() => {
+    if (!examRaw) return null;
+    try {
+      return convertToJSON(examRaw);
+    } catch (err) {
+      console.error("Failed to parse exam JSON:", err);
+      return null;
+    }
+  }, [examRaw]);
 
   const handleChangeTextInput = (name: string, newValue: string) => {
     setNewExam((preValue) => ({ ...preValue, [name]: newValue }));
@@ -50,6 +65,17 @@ export default function CreateExam() {
       router.push(`/teacher/exam/config-exam-online/${newExam.id}`);
     }
   };
+
+  useEffect(() => {
+    setNewExam(
+      (prev: ICreateExam) =>
+        ({
+          ...prev,
+          examName,
+          examContent,
+        } as ICreateExam)
+    );
+  }, [examName, examContent, setNewExam]);
 
   return (
     <div className="mx-auto h-full w-[1000px] max-w-[94vw] py-4 dark:text-slate-300">

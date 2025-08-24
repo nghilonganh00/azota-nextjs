@@ -1,3 +1,5 @@
+"use client";
+
 import { ICreateExam } from "@/interfaces/exam";
 
 interface ExamNameConfigProps {

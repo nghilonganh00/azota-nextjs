@@ -7,12 +7,13 @@ import AnonymousMenu from "./Menu/anonymousMenu";
 import Notification from "./Notification";
 import useGoBack from "@/hooks/useGoBack";
 import Image from "next/image";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 export default function TopBar() {
   const [accessToken, setAccessToken] = useState<string | null>(null);
 
+  const [token] = useLocalStorage<string | null>("accessToken", null);
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
     setAccessToken(token);
   }, []);
 

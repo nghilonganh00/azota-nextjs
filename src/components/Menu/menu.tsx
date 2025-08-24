@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 import UserAvatar from "../UserAvatar";
 import { IUser, UserRole } from "@/interfaces";
 import extractNameEdges from "@/lib/utils/extractNameEdges";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface MenuItemProps {
   icon: LucideIcon;
@@ -63,7 +64,8 @@ const Menu = () => {
   const router = useRouter();
   const [user, setUser] = useState<IUser>({} as IUser);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
-  const [theme, setTheme] = useState(() => localStorage.getItem("currentTheme") || "light");
+  const [theme, setTheme, ready] = useLocalStorage<"light" | "dark">("currentTheme", "light");
+
   const [isLoading, setIsLoading] = useState(false);
 
   const isTeacherView = window.location.pathname.startsWith("/teacher");
@@ -83,7 +85,6 @@ const Menu = () => {
       document.documentElement.classList.remove("dark");
     }
 
-    localStorage.setItem("currentTheme", newTheme);
     setTheme(newTheme);
   }, [theme]);
 

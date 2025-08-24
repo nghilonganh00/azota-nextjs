@@ -7,12 +7,15 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CreateAnonymousLayout } from "./components/CreateAnonymousLayout";
 import { NotLoggedInLayout } from "./components/NotLoggedinLayout";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 export default function IdentifyStudent() {
   const router = useRouter();
   const { hashId } = useParams<{ hashId: string }>();
   const [exam, setExam] = useState<IExam | null>(null);
-  const isLoggedIn = !!localStorage.getItem("accessToken");
+  const [accessToken] = useLocalStorage<string | null>("accessToken", null);
+
+  const isLoggedIn = !!accessToken;
 
   useEffect(() => {
     const fetchExamData = async () => {

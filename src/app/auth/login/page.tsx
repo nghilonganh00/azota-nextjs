@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import AuthAPI from "@/lib/api/auth";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 const loginSchema = z.object({
   username: z.string().nonempty("Vui lòng nhập tài khoản"),
@@ -21,6 +22,7 @@ const Login = () => {
   const router = useRouter();
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [serverError, setServerError] = useState("");
+  const [accessToken, setAccessToken] = useLocalStorage<string | null>("accessToken", null);
 
   const {
     register,
@@ -38,7 +40,7 @@ const Login = () => {
     if (response?.status === 200) {
       const loginData = response.data;
       if (loginData.accessToken) {
-        localStorage.setItem("accessToken", loginData.accessToken);
+        setAccessToken(loginData.accessToken);
         const isTeacher = loginData.user.role === "TEACHER";
         router.push(isTeacher ? "/teacher/dashboard" : "/student/classroom");
       }

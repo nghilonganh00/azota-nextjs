@@ -2,9 +2,11 @@
 
 import { EllipsisVertical, Plus, Sigma } from "lucide-react";
 import { useRef } from "react";
-import AzotaEditor, { AzotaEditorHandle } from "./azotaEditor";
+import { AzotaEditorHandle } from "./azotaEditor";
 import UploadFileButton from "./UploadFileButton";
 import ExamSampleSelector from "./ExamSampleSelector";
+import dynamic from "next/dynamic";
+
 interface EditorCodeProps {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
@@ -14,6 +16,8 @@ interface EditorCodeProps {
 const EditorCode: React.FC<EditorCodeProps> = (props) => {
   const { value, setValue, goToLine } = props;
   const azotaEditorRef = useRef<AzotaEditorHandle>(null);
+
+  const AzotaEditor = dynamic(() => import("./azotaEditor"), { ssr: false });
 
   const handleUpload = (file: File) => {
     const reader = new FileReader();

@@ -23,7 +23,7 @@ const ConfigArea: React.FC<ConfigAreaProps> = (props) => {
 
   const handleCopy = () => {
     navigator.clipboard
-      .writeText(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/homework/${hashId}`)
+      .writeText(`${window.location.origin}/homework/${hashId}`)
       .then(() => {
         addNotification("Sao chép thành công đường dẫn nộp bài", "SUCCESS");
       })
