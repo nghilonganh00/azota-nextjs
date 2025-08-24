@@ -33,7 +33,7 @@ const PublishHomework = () => {
     };
 
     fetchHomeworkConfig();
-  }, []);
+  }, [homeworkId]);
 
   console.log(process.env.REACT_APP_FRONTEND_URL);
 

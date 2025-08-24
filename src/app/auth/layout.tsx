@@ -1,6 +1,7 @@
 "use client";
 
 import { Moon } from "lucide-react";
+import Image from "next/image";
 import React from "react";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
@@ -10,10 +11,12 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         <div className="flex flex-1 flex-col">
           <div className="w-full border-b border-solid border-slate-200 px-8 py-4 dark:border-darkmode-400 ">
             <div className="flex items-center justify-between">
-              <img
-                width="95px"
+              <Image
                 src="https://239114911.e.cdneverest.net/cdnazota/storage_public/azota_assets/images/logo.svg"
-              ></img>
+                width={95}
+                height={95}
+                alt="Logo"
+              />
 
               <div className="flex items-center gap-2">
                 <Moon className="size-5 text-gray-500" strokeWidth={1.5} />

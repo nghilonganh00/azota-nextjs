@@ -22,7 +22,11 @@ const StudentCard: React.FC<StudentCardProps> = (props) => {
   const [openReportPopup, setOpenReportPopup] = useState<boolean>(false);
 
   const handleIdenify = () => {
-    studentClass.student ? setOpenReportPopup(true) : setOpenConfirmPopup(true);
+    if (studentClass.student) {
+      setOpenReportPopup(true);
+    } else {
+      setOpenConfirmPopup(true);
+    }
   };
 
   const handleConfirm = async () => {

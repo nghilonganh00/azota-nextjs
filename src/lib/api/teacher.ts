@@ -13,7 +13,7 @@ export const TeacherAPI = {
 
       return response;
     } catch (error) {
-      // Optionally log or handle error
+      console.error(error);
       return null;
     }
   },

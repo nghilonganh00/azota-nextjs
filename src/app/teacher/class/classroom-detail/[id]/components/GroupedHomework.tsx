@@ -1,5 +1,5 @@
 import { ChevronDown, FileText } from "lucide-react";
-import { IGroupedHomework } from "../libs/interface";
+import { IGroupedHomework, IHomework } from "../libs/interface";
 import { DateTimeFormat, isoDateUtil } from "@/lib/utils/date";
 import Link from "next/link";
 
@@ -21,8 +21,9 @@ const GroupedHomeworkList: React.FC<GroupedHomeworkProp> = (props) => {
       </div>
 
       <div className="mt-3 space-y-2 rounded-md bg-white p-3 shadow">
-        {groupedHomework[createdAt].map((homework: any) => (
+        {groupedHomework[createdAt].map((homework: IHomework) => (
           <Link
+            key={homework.id}
             href={`/teacher/homework/${homework.id}/submi`}
             className="flex items-center gap-4 rounded-md p-2 hover:cursor-pointer hover:bg-slate-100"
           >

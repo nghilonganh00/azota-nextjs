@@ -3,7 +3,7 @@
 import Popup from "@/components/Popup";
 import { IClassgroup } from "@/interfaces";
 import { ClassroomAPI } from "@/lib/api";
-import { Plus, PlusIcon, X } from "lucide-react";
+import { PlusIcon } from "lucide-react";
 import { Fragment, useState } from "react";
 import CreateClassGroup from "./CreateClassGroup";
 
@@ -33,9 +33,7 @@ const AddClassBtn: React.FC<AddClassBtnProps> = (props) => {
 
   const handleSubmit = async () => {
     const { className, classYear, classGroupId } = values;
-    const response: any = await ClassroomAPI.create(className, classYear, classGroupId);
-
-    const data = response.data;
+    const data = await ClassroomAPI.create(className, classYear, classGroupId);
 
     setClassGroupList((preList) => {
       return preList?.map((classGroup) => {

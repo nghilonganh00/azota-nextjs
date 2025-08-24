@@ -32,7 +32,7 @@ const AssignTabs: React.FC<AssignTabsProp> = (props) => {
   } = props;
 
   const { assignType } = examConfig;
-  const [classGroups, setClassGroups] = useState<IClassgroup[]>([]);
+
   const [classgroups, setClassgroups] = useState<IClassgroup[]>([]);
 
   const handleAssignClass = (assignClass: number) => {
@@ -45,17 +45,16 @@ const AssignTabs: React.FC<AssignTabsProp> = (props) => {
     const fetchData = async () => {
       const [classgroupRes, studentClassIdsRes] = await Promise.all([
         ClassGroupAPI.getAll(),
-        ClassGroupAPI.getStudentClasseIds(examConfig.id),
+        ClassGroupAPI.getStudentClasseIds(),
       ]);
 
       if (classgroupRes?.status !== 200 || studentClassIdsRes?.status !== 200) return;
 
-      setClassGroups(classgroupRes.data);
       setClassgroups(studentClassIdsRes.data);
     };
 
     fetchData();
-  }, []);
+  }, [examConfig.id]);
 
   return (
     <div className="grid grid-cols-12 gap-2">

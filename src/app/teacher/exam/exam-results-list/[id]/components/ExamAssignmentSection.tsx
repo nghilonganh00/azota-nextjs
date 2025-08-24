@@ -32,7 +32,7 @@ const ExamAssignmentBox = ({ exam }: { exam: IExam }) => {
 };
 
 export const ExamAssignmentSection: React.FC<ExamAssignmentSectionProps> = (props) => {
-  const { exam, setExam } = props;
+  const { exam } = props;
 
   return (
     <div className="space-y-2">

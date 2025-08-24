@@ -28,7 +28,7 @@ export default function IdentifyStudent() {
     };
 
     fetchExamData();
-  }, []);
+  }, [hashId]);
 
   useEffect(() => {
     if (!isLoggedIn || !exam) return;
@@ -38,7 +38,7 @@ export default function IdentifyStudent() {
     } else if (exam?.type === ExamType.TEST) {
       router.push(`/exam/${hashId}/take-exam`);
     }
-  }, [exam]);
+  }, [exam, hashId, isLoggedIn, router]);
 
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-[#3c3c3c80]">

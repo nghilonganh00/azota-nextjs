@@ -9,7 +9,7 @@ interface GoToQuestionButtonProps {
 }
 
 const GoToQuestionButton: React.FC<GoToQuestionButtonProps> = (props) => {
-  const { goToQuestion, setGoToQuestion, handleGoToQuestion } = props;
+  const { goToQuestion, handleGoToQuestion } = props;
   const [goToQuestionInput, setGoToQuestionInput] = useState<number>(goToQuestion);
 
   return (

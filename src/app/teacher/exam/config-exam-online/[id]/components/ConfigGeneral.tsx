@@ -9,7 +9,7 @@ interface ConfigGeneralProp {
   setAssignedclassrooms: React.Dispatch<React.SetStateAction<number[]>>;
   assignedStudentIds: number[];
   setAssignedStudentIds: React.Dispatch<React.SetStateAction<number[]>>;
-  handleChangeConfig: (name: string, newValue: any) => void;
+  handleChangeConfig: (name: string, newValue: string | number | number[] | null) => void;
   errors: { [key: string]: string };
   setErrors: React.Dispatch<React.SetStateAction<{ [key: string]: string }>>;
 }
@@ -23,7 +23,6 @@ const ConfigGeneral: React.FC<ConfigGeneralProp> = (props) => {
     setAssignedStudentIds,
     handleChangeConfig,
     errors,
-    setErrors,
   } = props;
 
   const { type, title, gradeId, subjectId, purposeId, duration } = examConfig;
@@ -112,8 +111,8 @@ const ConfigGeneral: React.FC<ConfigGeneralProp> = (props) => {
               </div>
 
               <div className="col-span-12 mt-1 text-xs text-slate-500 dark:text-slate-400">
-                Chỉ được phép gia hạn thêm 'Thời gian giao đề' hoặc 'Thời gian làm bài'. Việc sửa cấu hình lùi thời gian
-                khi học sinh đã thi có thể làm mất dữ liệu bài làm của học sinh.
+                {`Chỉ được phép gia hạn thêm 'Thời gian giao đề' hoặc 'Thời gian làm bài'. Việc sửa cấu hình lùi thời gian
+                khi học sinh đã thi có thể làm mất dữ liệu bài làm của học sinh.`}
               </div>
 
               <div className="col-span-12 mt-1 text-xs text-slate-500 dark:text-slate-400">

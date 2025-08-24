@@ -23,22 +23,25 @@ const NotificationContext = createContext<NotificationContextType | undefined>(u
 export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
-  const addNotification = useCallback((message: string, type: Notification["type"], duration = 3000) => {
-    const id = Date.now().toString() + Math.random().toString(36).substr(2, 9);
-    const notification: Notification = { id, message, type, duration };
-
-    setNotifications((prev) => [...prev, notification]);
-
-    if (duration > 0) {
-      setTimeout(() => {
-        removeNotification(id);
-      }, duration);
-    }
-  }, []);
-
   const removeNotification = useCallback((id: string) => {
     setNotifications((prev) => prev.filter((n) => n.id !== id));
   }, []);
+
+  const addNotification = useCallback(
+    (message: string, type: Notification["type"], duration = 3000) => {
+      const id = Date.now().toString() + Math.random().toString(36).substr(2, 9);
+      const notification: Notification = { id, message, type, duration };
+
+      setNotifications((prev) => [...prev, notification]);
+
+      if (duration > 0) {
+        setTimeout(() => {
+          removeNotification(id);
+        }, duration);
+      }
+    },
+    [removeNotification]
+  );
 
   const clearAll = useCallback(() => {
     setNotifications([]);

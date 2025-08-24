@@ -7,7 +7,7 @@ interface ConfigFeeProps {
 }
 
 const ConfigFee: React.FC<ConfigFeeProps> = (props) => {
-  const { examConfig, setExamConfig, handleChangeConfig } = props;
+  const { examConfig, handleChangeConfig } = props;
   const { fee } = examConfig;
 
   return (

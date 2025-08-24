@@ -1,11 +1,9 @@
 "use client";
 
 import Dropdown from "@/components/Dropdown/dropdown";
-import { IGrade } from "@/interfaces";
+import { IGrade, Tab } from "@/interfaces";
 import GradeAPI from "@/lib/api/grade";
 import { useEffect, useState } from "react";
-
-type Tab = { name: string; value: string };
 
 interface GradeDropdownProps {
   selectedGrade: Tab | null;
@@ -20,7 +18,7 @@ const GradeDropdown: React.FC<GradeDropdownProps> = (props) => {
     const fetchGrade = async () => {
       const respone = await GradeAPI.getAll();
       const grades: IGrade[] = respone?.data || [];
-      const gradeTabs = grades?.map((grade: any) => ({
+      const gradeTabs = grades?.map((grade: IGrade) => ({
         name: grade.name,
         value: grade.id,
       }));

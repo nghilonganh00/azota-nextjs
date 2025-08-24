@@ -1,36 +1,13 @@
 import StringUtil from "@/lib/utils/string";
+import { ExamJSON } from "../interface";
 
 enum QuestionType {
   MULTIQUE_CHOICE = "MULTIQLE_CHOICE",
   ESSAY = "ESSAY",
 }
 
-interface Option {
-  content: string;
-  key: string;
-  line: number;
-  isCorrect: boolean;
-}
-
-interface Question {
-  topic: string;
-  type: string;
-  rawIndex: number;
-  options: Record<string, Option>;
-  line: number;
-}
-
-interface Part {
-  title: string;
-  rawIndex: number;
-  questions: Record<string, Question>;
-  line: number;
-}
-
-export interface ExamContent extends Record<string, Part> {}
-
-const convertToJSON = (text: string) => {
-  const exam: ExamContent = {};
+const convertToJSON = (text: string): ExamJSON => {
+  const exam: ExamJSON = {};
   const lines = text.split("\n");
 
   // Define regex patterns
@@ -71,8 +48,6 @@ const convertToJSON = (text: string) => {
       questionIndex += 1;
 
       const questionKey = questionMatches[index][0];
-      const match = questionKey.match(/\d+/);
-      const rawIndex = match ? match[0] : null;
 
       // Find line number for question
       const questionLine = lines.findIndex((line) => line.includes(questionKey)) + 1;
@@ -90,6 +65,7 @@ const convertToJSON = (text: string) => {
         rawIndex: questionIndex,
         line: questionLine,
         options: {},
+        rightAnswer: "A",
       };
 
       optionKeys.forEach((optionKey) => {

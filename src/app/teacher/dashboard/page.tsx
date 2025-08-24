@@ -1,8 +1,6 @@
 import { BookOpen, CircleAlert, CircleHelp, FileText, Folder, Layers, Trash2, Users } from "lucide-react";
 import Link from "next/link";
 
-interface DashboardProps {}
-
 const TABS = [
   { icon: FileText, label: "Bài tập", link: "/teacher/homework/management" },
   { icon: Folder, label: "Đề thi", link: "/teacher/exam/management" },
@@ -15,7 +13,7 @@ const TABS = [
   },
 ];
 
-export default function Dashboard(props: DashboardProps) {
+export default function Dashboard() {
   return (
     <div className="w-full text-gray-800">
       <div className="mx-auto w-4/5 pt-10">

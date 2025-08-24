@@ -9,5 +9,5 @@ export interface INotification {
   message: string;
   readAt: string;
   createdAt: string;
-  extraData: Record<string, any>;
+  extraData: Record<string, unknown>;
 }

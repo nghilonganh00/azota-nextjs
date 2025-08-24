@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, forwardRef, useImperativeHandle } from "react";
 import MonacoEditor from "react-monaco-editor";
+import * as monaco from "monaco-editor";
 import { options } from "../lib/editorConfig";
 
 interface AzotaEditorProps {
@@ -16,15 +17,16 @@ export interface AzotaEditorHandle {
 
 const AzotaEditor = forwardRef<AzotaEditorHandle, AzotaEditorProps>((props, ref) => {
   const { value, setValue, goToLine } = props;
-  const editorRef = useRef<any>(null);
+  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
 
   useImperativeHandle(ref, () => ({
     insertTextAtCursor: (text: string) => {
       if (editorRef.current) {
         const editor = editorRef.current;
         const selection = editor.getSelection();
+        if (!selection) return;
         const id = { major: 1, minor: 1 };
-        editor.executeEdits(id, [
+        editor.executeEdits(id.toString(), [
           {
             range: selection,
             text,
@@ -36,7 +38,7 @@ const AzotaEditor = forwardRef<AzotaEditorHandle, AzotaEditorProps>((props, ref)
     },
   }));
 
-  const editorDidMount = (editor: any) => {
+  const editorDidMount = (editor: monaco.editor.IStandaloneCodeEditor) => {
     editorRef.current = editor;
     editor.focus();
     if (goToLine) {
@@ -58,8 +60,8 @@ const AzotaEditor = forwardRef<AzotaEditorHandle, AzotaEditorProps>((props, ref)
     localStorage.setItem("exam", value);
   };
 
-  const editorWillMount = (monaco: any) => {
-    if (!monaco.languages.getLanguages().some(({ id }: { id: String }) => id === "azota-editor")) {
+  const editorWillMount = () => {
+    if (!monaco.languages.getLanguages().some(({ id }: { id: string }) => id === "azota-editor")) {
       monaco.languages.register({ id: "azota-editor" });
 
       monaco.languages.setMonarchTokensProvider("azota-editor", {
@@ -108,5 +110,7 @@ const AzotaEditor = forwardRef<AzotaEditorHandle, AzotaEditorProps>((props, ref)
     />
   );
 });
+
+AzotaEditor.displayName = "AzotaEditor";
 
 export default AzotaEditor;

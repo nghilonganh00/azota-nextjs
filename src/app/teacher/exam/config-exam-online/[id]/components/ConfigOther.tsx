@@ -11,7 +11,7 @@ interface ConfigOtherProps {
 }
 
 const ConfigOther: React.FC<ConfigOtherProps> = (props) => {
-  const { examConfig, setExamConfig, handleChangeConfig } = props;
+  const { examConfig, handleChangeConfig } = props;
   const { header } = examConfig;
   const [openHeader, setOpenHeader] = useState<boolean>(header !== "");
   const [examHeader, setExamHeader] = useState(header || "");
@@ -59,8 +59,6 @@ const ConfigOther: React.FC<ConfigOtherProps> = (props) => {
               { value: "First.Name", title: "First Name" },
               { value: "Email", title: "Email" },
             ],
-            ai_request: (request: any, respondWith: any) =>
-              respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
           }}
           onEditorChange={handleEditorChange}
           initialValue={examHeader}

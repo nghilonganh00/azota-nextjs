@@ -13,7 +13,7 @@ interface ClassGroupPopupProps {
 }
 
 const ClassGroupPopup: React.FC<ClassGroupPopupProps> = (props) => {
-  const { showedClassGroup, setShowClassGroup, setShowClassroom, classGroups } = props;
+  const { showedClassGroup, setShowClassroom, classGroups } = props;
 
   const { classgroupName } = showedClassGroup;
   const [isOpen, setOpen] = useState<boolean>(false);

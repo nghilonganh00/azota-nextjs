@@ -22,7 +22,7 @@ export default function ConfigExamOnline() {
   const [assignedClassIds, setAssignedClassIds] = useState<number[]>([]);
   const [assignedStudentIds, setAssignedStudentIds] = useState<number[]>([]);
 
-  const handleChangeConfig = (name: string, newValue: any) => {
+  const handleChangeConfig = (name: string, newValue: string | number | number[] | null) => {
     setExamConfig((preValue) => ({ ...preValue, [name]: newValue }));
   };
 
@@ -52,7 +52,7 @@ export default function ConfigExamOnline() {
 
     if (!examId) return;
 
-    const response: any = await ExamAPI.publish(examId, examConfig, assignedStudentIds, assignedClassIds);
+    const response = await ExamAPI.publish(examId, examConfig, assignedStudentIds, assignedClassIds);
 
     if (response && response.status === 201) {
       const updatedExam: IExam = response.data;
@@ -60,19 +60,19 @@ export default function ConfigExamOnline() {
     }
   };
 
-  const fetchExamData = async () => {
-    if (examId) {
-      const response = await ExamAPI.getConfig(examId);
-      const data: IExam = response?.data;
-      setExamConfig(data);
-      setAssignedClassIds(() => data.examClasses.map((examClass: IExamClass) => examClass.classroom.id));
-      setAssignedStudentIds(() => data.examStudents?.map((examStudent: IExamStudent) => examStudent.studentClass.id));
-    }
-  };
-
   useEffect(() => {
+    const fetchExamData = async () => {
+      if (examId) {
+        const response = await ExamAPI.getConfig(examId);
+        const data: IExam = response?.data;
+        setExamConfig(data);
+        setAssignedClassIds(() => data.examClasses.map((examClass: IExamClass) => examClass.classroom.id));
+        setAssignedStudentIds(() => data.examStudents?.map((examStudent: IExamStudent) => examStudent.studentClass.id));
+      }
+    };
+
     fetchExamData();
-  }, []);
+  }, [examId]);
 
   console.log("config-exam-online: ", examId);
 

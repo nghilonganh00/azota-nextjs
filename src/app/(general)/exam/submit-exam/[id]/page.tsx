@@ -28,7 +28,7 @@ const SubmitExam = () => {
       }
     };
     fetchExamResultData();
-  }, []);
+  }, [examResultId]);
 
   console.log("exam result: ", examResult);
 

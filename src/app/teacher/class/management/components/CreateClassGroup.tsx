@@ -13,7 +13,7 @@ const CreateClassGroup: React.FC<CreateClassGroupProps> = (props) => {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [classgroupName, setclassgroupName] = useState<string>("");
 
-  const handleCreateClassGroup = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleCreateClassGroup = async () => {
     // e.preventDefault();
 
     const response = await ClassGroupAPI.create(classgroupName);

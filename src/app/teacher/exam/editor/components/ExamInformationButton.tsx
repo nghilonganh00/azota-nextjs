@@ -2,9 +2,10 @@
 import { CircleAlert } from "lucide-react";
 import { useState } from "react";
 import getExamStats from "../lib/util/getExamStats";
+import { ExamJSON } from "../lib/interface";
 
 interface ExamInformationButtonProps {
-  examJSON: any;
+  examJSON: ExamJSON;
 }
 
 const ExamInformationButton: React.FC<ExamInformationButtonProps> = (props) => {

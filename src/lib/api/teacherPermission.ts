@@ -20,6 +20,7 @@ const teacherPermissionAPI = {
 
       return response;
     } catch (error) {
+      console.error(error);
       return null;
     }
   },
@@ -44,6 +45,7 @@ const teacherPermissionAPI = {
 
       return response;
     } catch (error) {
+      console.error(error);
       return null;
     }
   },

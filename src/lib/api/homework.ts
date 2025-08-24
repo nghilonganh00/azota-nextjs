@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { axiosInstance } from "../axiosInstance";
-import { IHomework, INewHomework } from "@/interfaces";
+import { IHomework, IHomeworkFile, INewHomework } from "@/interfaces";
 import FirebaseStorage from "../firebaseStorage";
 
 const HOMEWORK_API_URL = `homeworks`;
@@ -15,7 +15,6 @@ const HomeworkAPI = {
     searchKeyword?: string
   ): Promise<AxiosResponse> => {
     try {
-      const accessToken = localStorage.getItem("accessToken");
       const url = "homeworks";
 
       const params = {
@@ -79,7 +78,6 @@ const HomeworkAPI = {
   },
   getByHashId: async (hashId: string): Promise<AxiosResponse> => {
     try {
-      const accessToken = localStorage.getItem("accessToken");
       const url = `homeworks/hash/${hashId}`;
 
       const response = await axiosInstance.get(url, {
@@ -93,9 +91,8 @@ const HomeworkAPI = {
       throw error;
     }
   },
-  getResultOfClass: async (homeworkId: string, classId: string) => {
+  getResultOfClass: async (homeworkId: string) => {
     try {
-      const accessToken = localStorage.getItem("accessToken");
       const url = `homework/${homeworkId}/homework-results`;
 
       const response = await axiosInstance.get(url, {
@@ -129,7 +126,6 @@ const HomeworkAPI = {
   },
   getClassWithHomework: async () => {
     try {
-      const accessToken = localStorage.getItem("accessToken");
       const url = "homework/class";
 
       const response = await axiosInstance.get(url, {
@@ -145,7 +141,6 @@ const HomeworkAPI = {
   },
   getConfig: async (homeworkId: string) => {
     try {
-      const accessToken = localStorage.getItem("accessToken");
       const url = `homeworks/${homeworkId}`;
 
       const response = await axiosInstance.get(url, {
@@ -162,7 +157,6 @@ const HomeworkAPI = {
 
   trash: async (homeworkId: string) => {
     try {
-      const accessToken = localStorage.getItem("accessToken");
       const url = `homework/${homeworkId}/trash`;
 
       const response = await axiosInstance.get(url, {
@@ -184,7 +178,7 @@ const HomeworkAPI = {
       const { homeworkFiles } = newHomework;
 
       const homeworkFileObj = await Promise.all(
-        homeworkFiles.map(async (homeworkFile: any) => {
+        homeworkFiles.map(async (homeworkFile: File) => {
           const uploadFile = await FirebaseStorage.upload(homeworkFile);
           return {
             title: uploadFile.filename,

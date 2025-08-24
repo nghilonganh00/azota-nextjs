@@ -9,7 +9,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import AuthAPI from "@/lib/api/auth";
-import UserAPI from "@/lib/api/user";
 
 const loginSchema = z.object({
   username: z.string().nonempty("Vui lòng nhập tài khoản"),

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { AxiosResponse } from "axios";
-import { Tab } from "@/interfaces";
+import { ISubject, Tab } from "@/interfaces";
 import SubjectAPI from "@/lib/api/subject";
 import Dropdown from "@/components/Dropdown/dropdown";
 
@@ -23,7 +23,7 @@ const SubjectDropdown: React.FC<ConfigDropdownProps> = (props) => {
 
       const response: AxiosResponse | null = await SubjectAPI.getByGradeId(selectedGradeId);
 
-      const subjectTabs: Tab[] = response?.data.map((subject: any) => ({
+      const subjectTabs: Tab[] = response?.data.map((subject: ISubject) => ({
         name: subject.subjectName,
         value: subject.id,
       }));

@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { Filter, Plus, Search } from "lucide-react";
 import { useParams } from "next/navigation";
 import HomeworkAPI from "@/lib/api/homework";
-import { IHomework } from "@/interfaces";
-import { IGroupedHomework } from "../libs/interface";
+import { IGroupedHomework, IHomework } from "../libs/interface";
 import HomeworkUtils from "../libs/utils";
 import GroupedHomeworkList from "./GroupedHomework";
 
@@ -26,7 +25,7 @@ const ListHomeworkAndExam = () => {
     };
 
     fetchHomeworks();
-  }, []);
+  }, [classId]);
 
   console.log("grouped homework: ", groupedHomework);
 
@@ -59,7 +58,7 @@ const ListHomeworkAndExam = () => {
 
       <div className="space-y-4">
         {Object.keys(groupedHomework)?.map((createdAt) => {
-          return <GroupedHomeworkList groupedHomework={groupedHomework} createdAt={createdAt} />;
+          return <GroupedHomeworkList key={createdAt} groupedHomework={groupedHomework} createdAt={createdAt} />;
         })}
 
         {Object.keys(groupedHomework).length === 0 && (

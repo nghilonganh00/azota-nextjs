@@ -2,10 +2,11 @@
 
 import { SquareDivide } from "lucide-react";
 import { useState } from "react";
+import { ExamJSON, Part, Question } from "../lib/interface";
 
 interface SetPointsButtonProps {
-  examJSON: any;
-  setExamJSON: React.Dispatch<React.SetStateAction<any>>;
+  examJSON: ExamJSON;
+  setExamJSON: React.Dispatch<React.SetStateAction<ExamJSON>>;
 }
 
 const SetPointsButton: React.FC<SetPointsButtonProps> = (props) => {
@@ -23,7 +24,7 @@ const SetPointsButton: React.FC<SetPointsButtonProps> = (props) => {
 
     // Count total number of questions
     let questionCount = 0;
-    Object.values(examJSON).forEach((part: any) => {
+    Object.values(examJSON).forEach((part: Part) => {
       if (part && part.questions) {
         questionCount += Object.keys(part.questions).length;
       }
@@ -35,10 +36,10 @@ const SetPointsButton: React.FC<SetPointsButtonProps> = (props) => {
 
     // Create a new examJSON with updated points
     const newExamJSON = Object.fromEntries(
-      Object.entries(examJSON).map(([partKey, part]: [string, any]) => {
+      Object.entries(examJSON).map(([partKey, part]: [string, Part]) => {
         if (!part || !part.questions) return [partKey, part];
         const newQuestions = Object.fromEntries(
-          Object.entries(part.questions).map(([qKey, q]: [string, any]) => [
+          Object.entries(part.questions).map(([qKey, q]: [string, Question]) => [
             qKey,
             { ...q, scorePerQuestion: scorePerQuestion },
           ])

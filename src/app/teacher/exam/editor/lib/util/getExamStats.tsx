@@ -1,8 +1,10 @@
-function getExamStats(examJSON: any) {
+import { ExamJSON, Part, Question } from "../interface";
+
+function getExamStats(examJSON: ExamJSON) {
   let totalMultiChoice = 0;
   let totalUnanswered = 0;
-  let multiChoiceList: string[] = [];
-  let unansweredList: string[] = [];
+  const multiChoiceList: string[] = [];
+  const unansweredList: string[] = [];
 
   if (!examJSON || typeof examJSON !== "object") {
     return {
@@ -13,9 +15,9 @@ function getExamStats(examJSON: any) {
     };
   }
 
-  Object.entries(examJSON).forEach(([partKey, part]: [string, any]) => {
+  Object.entries(examJSON).forEach(([partKey, part]: [string, Part]) => {
     if (part && part.questions) {
-      Object.entries(part.questions).forEach(([questionKey, question]: [string, any]) => {
+      Object.entries(part.questions).forEach(([questionKey, question]: [string, Question]) => {
         // Multi-choice: type === "multi-choice"
         if (Object.keys(question.options).length > 0) {
           totalMultiChoice += 1;

@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 const storage = getStorage(app);
 
 const FirebaseStorage = {
-  upload: async (file: any) => {
+  upload: async (file: File) => {
     const uniqueFileName = `${uuidv4()}_${file.name}`;
     const storageRef = ref(storage, uniqueFileName);
     const snapshot = await uploadBytes(storageRef, file);

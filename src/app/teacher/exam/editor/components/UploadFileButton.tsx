@@ -1,6 +1,7 @@
 "use client";
 
 import { Upload } from "lucide-react";
+import mammoth from "mammoth";
 import { useRef } from "react";
 
 interface UploadFileButtonProps {
@@ -20,13 +21,12 @@ const UploadFileButton: React.FC<UploadFileButtonProps> = ({ onUpload }) => {
       // If it's a .docx file, extract text using mammoth
       if (file.name.endsWith(".docx")) {
         try {
-          // @ts-ignore
-          const mammoth = await import("mammoth");
+          // const mammoth = await import("mammoth");
           const arrayBuffer = await file.arrayBuffer();
           const result = await mammoth.extractRawText({ arrayBuffer });
           onUpload(new File([result.value], file.name + ".txt", { type: "text/plain" }));
         } catch (err) {
-          alert("Failed to read Word file. Please try again.");
+          alert("Failed to read Word file. Please try again." + err);
         }
       } else {
         onUpload(file);

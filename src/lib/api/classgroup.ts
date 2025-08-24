@@ -23,7 +23,7 @@ const ClassGroupAPI = {
       return null;
     }
   },
-  getStudentClasseIds: async (examId: string | number): Promise<AxiosResponse | null> => {
+  getStudentClasseIds: async (): Promise<AxiosResponse | null> => {
     try {
       const accessToken = localStorage.getItem("accessToken");
       const userId = localStorage.getItem("accessToken");

@@ -12,7 +12,7 @@ interface ClassBoxProps {
 
 const ClassBox: React.FC<ClassBoxProps> = (props) => {
   const { data } = props;
-  const { id, className, homeworks } = data;
+  const { className, homeworks } = data;
 
   console.log(data);
 

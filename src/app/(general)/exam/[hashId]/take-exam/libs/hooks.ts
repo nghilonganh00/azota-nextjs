@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const useCountDown = (duration: number) => {
   const [secondLeft, setSecondLeft] = useState(duration);
 
-  const calculateTimeLeft = () => {
+  const calculateTimeLeft = useCallback(() => {
     let timeLeft: { hours: string; minutes: string; seconds: string } = {
       hours: "00",
       minutes: "00",
@@ -25,7 +25,7 @@ export const useCountDown = (duration: number) => {
     setSecondLeft((pre) => pre - 1);
 
     return timeLeft;
-  };
+  }, [secondLeft]);
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft);
 
@@ -35,7 +35,7 @@ export const useCountDown = (duration: number) => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [secondLeft]);
+  }, [secondLeft, calculateTimeLeft]);
 
   return timeLeft;
 };

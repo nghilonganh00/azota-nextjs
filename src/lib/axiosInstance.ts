@@ -13,8 +13,13 @@ interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
   _retry?: boolean;
 }
 
+interface FailedRequest {
+  resolve: (token: string) => void;
+  reject: (error: unknown) => void;
+}
+
 let isRefreshing = false;
-let failedRequestsQueue: any[] = [];
+let failedRequestsQueue: FailedRequest[] = [];
 
 export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,

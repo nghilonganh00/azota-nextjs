@@ -2,11 +2,8 @@
 
 import StudentLeftNavbar from "@/components/LeftNavbar/StudentLeftNavbar";
 import TopBar from "@/components/Topbar";
-import { usePathname } from "next/navigation";
 
 const StudentLayout = ({ children }: { children: React.ReactNode }) => {
-  const pathname = usePathname();
-
   return (
     <div className="flex h-screen overflow-y-hidden">
       <StudentLeftNavbar />

@@ -27,7 +27,6 @@ export const StudentClassroomAPI = {
   },
   getByClassroomId: async (classroomId: string | number): Promise<AxiosResponse | null> => {
     try {
-      const accessToken = localStorage.getItem("accessToken");
       const response = await axiosInstance.get(`${STUDENT_CLASS_API_URL}/classroom/${classroomId}`, {
         headers: {
           "Content-Type": "application/json",
@@ -83,7 +82,6 @@ export const StudentClassroomAPI = {
 
   createAnonymous: async (fullname: string): Promise<AxiosResponse | null> => {
     try {
-      const accessToken = localStorage.getItem("accessToken");
       const response = await axiosInstance.post(
         `${STUDENT_CLASS_API_URL}/anonymous`,
         { fullname },

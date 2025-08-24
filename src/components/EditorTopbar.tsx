@@ -2,11 +2,12 @@
 
 import { useEffect, useState, useCallback } from "react";
 import Menu from "./Menu/menu";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useNotification } from "@/context/notificationContext";
 import convertToJSON from "@/app/teacher/exam/editor/lib/util/formatExam";
 import Link from "next/link";
 import { Bell } from "lucide-react";
+import Image from "next/image";
 
 // Constants
 const LOGO_URL = "https://239114911.e.cdneverest.net/cdnazota/storage_public/azota_assets/images/logo.svg";
@@ -36,7 +37,6 @@ interface ExamJSON {
 
 export default function EditorTopBar() {
   const router = useRouter();
-  const pathname = usePathname();
   const { addNotification } = useNotification();
 
   const [examName, setExamName] = useState("");
@@ -85,13 +85,19 @@ export default function EditorTopBar() {
   // Effects
   useEffect(() => {
     setOpenExamNameInput(location.pathname === EDITOR_PATH);
-  }, [location.pathname]);
+  }, []);
 
   // Render functions
   const renderLogo = () => (
     <div className="col-span-2">
       <Link href="/" className="hover:cursor-pointer">
-        <img width="95" src={LOGO_URL} alt="Azota Logo" className="h-auto" />
+        <Image
+          src={LOGO_URL}
+          alt="Azota Logo"
+          width={95}
+          height={95} // nếu muốn giữ tỉ lệ, có thể thay đổi height
+          className="h-auto"
+        />
       </Link>
     </div>
   );
@@ -131,7 +137,13 @@ export default function EditorTopBar() {
   const renderActions = () => (
     <div className="col-span-4">
       <div className="flex items-center justify-end gap-5 pr-2">
-        <img src={FLAG_URL} alt="Vietnamese Flag" className="h-5 w-auto" />
+        <Image
+          src={FLAG_URL} 
+          alt="Vietnamese Flag"
+          width={20}
+          height={20}
+          className="h-5 w-auto"
+        />
         <Bell className="size-5 text-slate-600 dark:text-slate-400" />
         <Menu />
       </div>

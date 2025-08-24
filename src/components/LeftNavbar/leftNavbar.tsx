@@ -1,9 +1,9 @@
 "use client";
 
 import { BookOpen, FileText, Folder, House, Layers, Settings, Users } from "lucide-react";
-// import Logo from "../../../logo.svg";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 const TABS = [
   { icon: House, link: "/teacher/dashboard" },
@@ -20,7 +20,9 @@ const LeftNavbar = () => {
   return (
     <nav className="hidden h-screen w-24 bg-blue-800 dark:bg-[#1b253b] md:block">
       <div className="flex flex-col items-center pt-5">
-        <Link href="/">{/* <img src={Logo} alt="" className="w-10" /> */}</Link>
+        <Link href="/">
+          <Image src={"/logo.svg"} alt="Logo" width={40} height={40} priority />
+        </Link>
         <div className="mt-9 space-y-1">
           {TABS.map((tab, index) => {
             const isActive = pathname === tab.link;

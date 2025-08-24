@@ -13,7 +13,7 @@ const PurposeDropdown: React.FC<ConfigDropdownProps> = (props) => {
   const [groupedPurposes, setGroupedPurposes] = useState<Record<number, IPurpose[]>>([]);
   const [isOpen, setOpen] = useState<boolean>(false);
 
-  const handleChangeValue = (option: any) => {
+  const handleChangeValue = (option: Tab | null) => {
     setSelectValue(option);
     setOpen(false);
   };
@@ -24,7 +24,7 @@ const PurposeDropdown: React.FC<ConfigDropdownProps> = (props) => {
 
       const purposes: IPurpose[] = respone?.data || [];
 
-      const groupedPurposesData = purposes.reduce((acc: any, item) => {
+      const groupedPurposesData = purposes.reduce((acc, item) => {
         if (!acc[item.semester]) {
           acc[item.semester] = [];
         }

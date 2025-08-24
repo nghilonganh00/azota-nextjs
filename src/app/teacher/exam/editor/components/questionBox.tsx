@@ -1,20 +1,21 @@
 "use client";
 
-import { Check, ChevronDown, CircleX, EllipsisVertical, Paperclip, Tag } from "lucide-react";
+import { Check, ChevronDown, EllipsisVertical, Paperclip } from "lucide-react";
 import EnterMark from "./enterMark";
 import LevelSelector from "./LevelSelector";
+import { ExamJSON } from "../lib/interface";
 
 interface QuestionBoxProps {
   partKey: string;
   questionKey: string;
-  examJSON: any;
-  setExamJSON: React.Dispatch<React.SetStateAction<any>>;
+  examJSON: ExamJSON;
+  setExamJSON: React.Dispatch<React.SetStateAction<ExamJSON>>;
   handleGoToLine: () => void;
 }
 
 const QuestionBox: React.FC<QuestionBoxProps> = (props) => {
   const { partKey, questionKey, examJSON, setExamJSON, handleGoToLine } = props;
-  const { topic, options, rightAnswer, type, level, questionIndex } = examJSON[partKey]["questions"][questionKey];
+  const { topic, options, type, level, questionIndex } = examJSON[partKey]["questions"][questionKey];
 
   const handleChangeRightAnswer = (optionKey: string, isCorrect: boolean) => {
     const newExamJSON = {
@@ -73,7 +74,7 @@ const QuestionBox: React.FC<QuestionBoxProps> = (props) => {
           <ChevronDown strokeWidth={1.5} className="size-4" />
         </div>
 
-        <LevelSelector level={level} handleChangeLevel={handleChangeLevel} />
+        <LevelSelector level={level || "EASY"} handleChangeLevel={handleChangeLevel} />
 
         <div className="hover:cursor-pointer hover:bg-gray-100">
           <EllipsisVertical className="size-4 text-gray-700 dark:text-blue-600" strokeWidth={1.5} />

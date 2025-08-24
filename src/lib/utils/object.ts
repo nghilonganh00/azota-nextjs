@@ -1,16 +1,15 @@
 const ObjectUtil = {
-  getObjectDepth: (obj: Object) => {
+  getObjectDepth: (obj: Record<string, unknown>): number => {
     let maxDepth = 1;
 
-    const findDepth = (currentObj: any, currentDepth: number) => {
+    const findDepth = (currentObj: unknown, currentDepth: number) => {
       if (typeof currentObj === "object" && currentObj !== null) {
         currentDepth++;
-        if (currentDepth > maxDepth) {
-          maxDepth = currentDepth;
-        }
-        for (const key in currentObj) {
-          if (currentObj.hasOwnProperty(key)) {
-            findDepth(currentObj[key], currentDepth);
+        maxDepth = Math.max(maxDepth, currentDepth);
+
+        for (const key in currentObj as Record<string, unknown>) {
+          if (Object.prototype.hasOwnProperty.call(currentObj, key)) {
+            findDepth((currentObj as Record<string, unknown>)[key], currentDepth);
           }
         }
       }

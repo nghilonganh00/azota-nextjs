@@ -28,7 +28,7 @@ const NotificationItem = ({
         );
       }
     };
-  }, []);
+  }, [notification._id, notification.readAt, setNotifications]);
 
   return (
     <div className={`flex items-center gap-4 px-2 ${notification.readAt ? "opacity-40" : ""}`}>
@@ -90,7 +90,7 @@ export default function Notification() {
           .slice(0, 4)
       );
     }
-  }, [isOpenDropdown]);
+  }, [notifications, isOpenDropdown]);
 
   useEffect(() => {
     // let socketInstance: any;

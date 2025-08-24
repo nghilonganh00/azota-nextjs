@@ -1,7 +1,6 @@
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import FirebaseStorage from "../firebaseStorage";
 import { axiosInstance } from "../axiosInstance";
-
 
 const accessToken = localStorage.getItem("accessToken");
 
@@ -15,7 +14,7 @@ export const HomeworkSubmissionFileAPI = {
             title: uploadFile.filename,
             link: uploadFile.downloadURL,
           };
-        }),
+        })
       );
 
       const url = `homework-submission-files`;
@@ -27,7 +26,7 @@ export const HomeworkSubmissionFileAPI = {
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
           },
-        },
+        }
       );
 
       return response;

@@ -1,17 +1,18 @@
 "use client";
 
-import { useState, Fragment } from "react";
+import { useState } from "react";
+import { ExamJSON } from "../lib/interface";
 
 interface EnterMarkProps {
   partKey: string;
   questionKey: string;
-  examJSON: any;
-  setExamJSON: React.Dispatch<React.SetStateAction<any>>;
+  examJSON: ExamJSON;
+  setExamJSON: React.Dispatch<React.SetStateAction<ExamJSON>>;
 }
 
 const EnterMark: React.FC<EnterMarkProps> = (props) => {
   const { partKey, questionKey, examJSON, setExamJSON } = props;
-  const score = Math.round(examJSON[partKey]["questions"][questionKey]["scorePerQuestion"] * 100) / 100;
+  const score = Math.round((examJSON[partKey]?.questions[questionKey]?.scorePerQuestion || 0) * 100) / 100;
 
   const [isOpenInput, setOpenInput] = useState(false);
 
@@ -27,7 +28,7 @@ const EnterMark: React.FC<EnterMarkProps> = (props) => {
       },
     };
 
-    newExamJSON[partKey]["questions"][questionKey]["scorePerQuestion"] = scorePerQuestion;
+    newExamJSON[partKey]["questions"][questionKey]["scorePerQuestion"] = Number(scorePerQuestion);
 
     setExamJSON(() => newExamJSON);
   };

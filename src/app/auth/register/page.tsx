@@ -19,7 +19,6 @@ export default function Register() {
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const {
-    register,
     handleSubmit,
     formState: { errors },
     setValue,

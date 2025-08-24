@@ -2,10 +2,9 @@
 
 import { IClassroom } from "@/interfaces";
 import { ClassroomAPI } from "@/lib/api";
-import { CalendarCheck, Ellipsis, Newspaper, Plus, Search } from "lucide-react";
+import { Plus, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import ClassroomCard from "./components/ClassroomCard";
-import HomeworkAPI from "@/lib/api/homework";
 
 export default function Classroom() {
   const [classrooms, setClassrooms] = useState<IClassroom[]>([]);

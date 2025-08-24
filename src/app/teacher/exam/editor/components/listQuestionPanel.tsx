@@ -6,10 +6,11 @@ import ExamInformationButton from "./ExamInformationButton";
 import GoToQuestionButton from "./GoToQuestionButton";
 import TitleExamPart from "./titleExamPart";
 import QuestionBox from "./questionBox";
+import { ExamJSON } from "../lib/interface";
 
 interface ListQuestionPanelProps {
-  examJSON: any;
-  setExamJSON: React.Dispatch<React.SetStateAction<any>>;
+  examJSON: ExamJSON;
+  setExamJSON: React.Dispatch<React.SetStateAction<ExamJSON>>;
   handleGoToLine: (line: number) => void;
 }
 
@@ -43,14 +44,14 @@ const ListQuestionPanel: React.FC<ListQuestionPanelProps> = (props) => {
         <div className="space-y-3">
           {examJSON &&
             Object.keys(examJSON).map((partKey) => {
-              const { title, questions, rawIndex: partIndex, line } = examJSON[partKey];
+              const { title, questions, line } = examJSON[partKey];
 
               return (
                 <Fragment key={partKey}>
                   <TitleExamPart partTitle={title} handleGoToLine={() => handleGoToLine(line)} />
 
                   {Object.keys(questions).map((questionKey) => {
-                    const { rawIndex: questionIndex, line } = questions[questionKey];
+                    const { line } = questions[questionKey];
 
                     return (
                       <QuestionBox

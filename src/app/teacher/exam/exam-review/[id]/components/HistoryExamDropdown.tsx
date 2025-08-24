@@ -29,8 +29,8 @@ const HistoryExamDropdown: React.FC<HistoryExamDropdownProps> = (props) => {
             const { id, score, startedAt, savedAt } = result;
 
             return (
-              <MenuDropdown.Item>
-                <Link href={`/teacher/exam/exam-review/${id}`} key={result.id}>
+              <MenuDropdown.Item key={result.id}>
+                <Link href={`/teacher/exam/exam-review/${id}`}>
                   <div
                     className={
                       "space-y-1 rounded-md border-b border-gray-200 p-2 hover:cursor-pointer hover:bg-slate-100" +

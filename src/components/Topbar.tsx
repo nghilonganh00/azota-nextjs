@@ -6,6 +6,7 @@ import Menu from "./Menu/menu";
 import AnonymousMenu from "./Menu/anonymousMenu";
 import Notification from "./Notification";
 import useGoBack from "@/hooks/useGoBack";
+import Image from "next/image";
 
 export default function TopBar() {
   const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -46,10 +47,13 @@ export default function TopBar() {
             <Gem className="size-6" strokeWidth={1.5} />
             <p className="text-xs">Nâng VIP</p>
           </div>
-          <img
-            alt="flag/vi.svg"
+          <Image
             src="https://239114911.e.cdneverest.net/cdnazota/storage_public/azota_assets/flag/vi.svg"
-          ></img>
+            alt="Vietnam Flag"
+            width={24} // hoặc kích thước bạn muốn
+            height={24}
+            className="object-contain"
+          />
 
           <Notification />
 

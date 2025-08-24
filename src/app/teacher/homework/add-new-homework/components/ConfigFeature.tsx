@@ -33,7 +33,7 @@ const ConfigFeature: React.FC<ConfigFeatureProps> = (props) => {
                 name="homework_isShowAnswer"
                 value={"true"}
                 checked={values.isShowResult === false}
-                onChange={(e) => onChange("homeworkShowResult", true)}
+                onChange={() => onChange("homeworkShowResult", true)}
                 type="radio"
               />
               <label htmlFor="hw_showAnswer">Có</label>
@@ -54,7 +54,7 @@ const ConfigFeature: React.FC<ConfigFeatureProps> = (props) => {
                 name="homework_mustLogin"
                 value={"false"}
                 checked={values.isMustLogin === false}
-                onChange={(e) => onChange("isMustLogin", false)}
+                onChange={() => onChange("isMustLogin", false)}
                 type="radio"
               />
               <label htmlFor="hw_not_mustLogin">Không</label>
@@ -65,7 +65,7 @@ const ConfigFeature: React.FC<ConfigFeatureProps> = (props) => {
                 name="homework_mustLogin"
                 value={"true"}
                 checked={values.isMustLogin === true}
-                onChange={(e) => onChange("isMustLogin", true)}
+                onChange={() => onChange("isMustLogin", true)}
                 type="radio"
               />
               <label htmlFor="hw_mustLogin">Có</label>

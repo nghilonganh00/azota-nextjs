@@ -30,6 +30,7 @@ export const NotificationAPI = {
 
       return response;
     } catch (error) {
+      console.log(error);
       return null;
     }
   },
@@ -40,6 +41,7 @@ export const NotificationAPI = {
 
       return response;
     } catch (error) {
+      console.error(error);
       return null;
     }
   },

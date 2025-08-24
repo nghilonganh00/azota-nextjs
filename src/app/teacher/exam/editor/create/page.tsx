@@ -32,7 +32,7 @@ export default function CreateExam() {
   };
 
   const handleSubmit = async () => {
-    if (!newExam.examName || !selectedGrade || !selectedPurpose || !selectedSubject) {
+    if (!newExam.examName || !selectedGrade?.value || !selectedPurpose?.value || !selectedSubject?.value) {
       return;
     }
 
@@ -67,7 +67,7 @@ export default function CreateExam() {
             <GradeDropdown selectedGrade={selectedGrade} setSelectedGrade={setSelectedGrade} />
 
             <SubjectDropdown
-              selectedGradeId={selectedGrade?.value || null}
+              selectedGradeId={selectedGrade?.value?.toString() || null}
               selectedValue={selectedSubject}
               setSelectValue={setSelectedSubject}
             />

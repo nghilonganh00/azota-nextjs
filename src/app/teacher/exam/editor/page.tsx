@@ -5,11 +5,12 @@ import { useEffect, useRef, useState } from "react";
 import ListQuestionPanel from "./components/listQuestionPanel";
 import EditorCode from "./components/editorCode";
 import convertToJSON from "./lib/util/formatExam";
+import { ExamJSON } from "./lib/interface";
 
 const Editor = () => {
   const savedEditorValue = localStorage.getItem("exam") ?? "";
   const [editorValue, setEditorValue] = useState(savedEditorValue);
-  const [examJSON, setExamJSON] = useState<{ [key: string]: any }>();
+  const [examJSON, setExamJSON] = useState<ExamJSON>({} as ExamJSON);
   console.log("examJSON: ", examJSON);
   const [goToLine, setGoToLine] = useState<number>(1);
 
@@ -19,15 +20,13 @@ const Editor = () => {
 
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
 
-  //Covert text in the Editor from string to JSON
-  const handleCovertEditorIntoJSON = () => {
-    const covertedExamJSON = convertToJSON(editorValue);
-    setExamJSON(covertedExamJSON);
-    localStorage.setItem("exam", editorValue);
-  };
-
-  //After 1 seconds the user cannot edit in the EditorCode, the conversion function will be performed
   useEffect(() => {
+    const handleCovertEditorIntoJSON = () => {
+      const covertedExamJSON: ExamJSON = convertToJSON(editorValue);
+      setExamJSON(covertedExamJSON);
+      localStorage.setItem("exam", editorValue);
+    };
+
     if (debounceTimeout.current) {
       clearTimeout(debounceTimeout.current);
     }
@@ -51,7 +50,7 @@ const Editor = () => {
         <title>Tạo bài thi</title>
       </Head>
 
-      <ListQuestionPanel examJSON={examJSON} setExamJSON={setExamJSON} handleGoToLine={handleGoToLine} />
+      {examJSON && <ListQuestionPanel examJSON={examJSON} setExamJSON={setExamJSON} handleGoToLine={handleGoToLine} />}
 
       <EditorCode value={editorValue} setValue={setEditorValue} goToLine={goToLine} />
     </div>

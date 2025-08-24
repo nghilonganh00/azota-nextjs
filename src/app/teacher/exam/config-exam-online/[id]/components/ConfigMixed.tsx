@@ -9,7 +9,7 @@ interface ConfigMixedProp {
 }
 
 const ConfigMixed: React.FC<ConfigMixedProp> = (props) => {
-  const { examConfig, setExamConfig, handleChangeConfig } = props;
+  const { examConfig, setExamConfig } = props;
   const { isRandomQuestion, isHideGroupQuestionTitle, isSectionsStartingFromQuestion1 } = examConfig;
 
   const [openRandomQuestion, setOpenRandomQuestion] = useState(isRandomQuestion);
@@ -25,7 +25,7 @@ const ConfigMixed: React.FC<ConfigMixedProp> = (props) => {
       isHideGroupQuestionTitle: openHideGroupQuestionTitle,
       isSectionsStartingFromQuestion1: openSectionsStartingFromQuestion1,
     }));
-  }, [openRandomQuestion, openHideGroupQuestionTitle, openSectionsStartingFromQuestion1]);
+  }, [openRandomQuestion, openHideGroupQuestionTitle, openSectionsStartingFromQuestion1, setExamConfig]);
 
   return (
     <div className="rounded-md bg-white px-5 py-6 text-gray-800 shadow dark:bg-darkmode-600 dark:text-slate-300">

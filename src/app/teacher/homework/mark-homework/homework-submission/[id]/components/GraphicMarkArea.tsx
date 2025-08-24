@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import useGoBack from "@/hooks/useGoBack";
 import { IHomeworkSubmission } from "@/interfaces";
+import Image from "next/image";
 
 interface GraphicMarkAreaProps {
   homeworkSubmission: IHomeworkSubmission | null;
@@ -70,7 +71,16 @@ export const GraphicMarkArea: React.FC<GraphicMarkAreaProps> = (props) => {
 
           <div className="scrollbar h-[600px] overflow-y-auto">
             {homeworkSubmission?.files?.map((file) => {
-              return <img src={file.link} key={file.id}></img>;
+              return (
+                <Image
+                  key={file.id}
+                  src={file.link}
+                  alt={file.title || "File Image"} // luôn có alt
+                  width={800} // chiều rộng mong muốn
+                  height={600} // chiều cao tương ứng
+                  className="w-full h-auto"
+                />
+              );
             })}
           </div>
         </div>

@@ -1,7 +1,6 @@
-import useGoBack from "@/hooks/useGoBack";
 import { IExam, IUser } from "@/interfaces";
 import UserAPI from "@/lib/api/user";
-import { ChevronLeft, FilePenLine, Hand, Maximize, Timer, ZoomIn, ZoomOut } from "lucide-react";
+import { FilePenLine, Maximize, Timer, ZoomIn, ZoomOut } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCountDown } from "../libs/hooks";
 
@@ -13,8 +12,7 @@ interface TakeExamHeaderProps {
 const TakeExamHeader: React.FC<TakeExamHeaderProps> = (props) => {
   const { exam, handleFinish } = props;
 
-  const goBack = useGoBack();
-  let timeLeft = useCountDown((exam?.duration || 0) * 60);
+  const timeLeft = useCountDown((exam?.duration || 0) * 60);
   const [user, setUser] = useState<IUser>();
 
   useEffect(() => {
@@ -23,7 +21,7 @@ const TakeExamHeader: React.FC<TakeExamHeaderProps> = (props) => {
     if (timeLeft.hours === "00" && timeLeft.minutes === "00" && timeLeft.seconds === "00" && exam?.duration !== 0) {
       handleFinish();
     }
-  }, [timeLeft]);
+  }, [timeLeft, exam?.duration, handleFinish]);
 
   useEffect(() => {
     const fetchUserInfoData = async () => {

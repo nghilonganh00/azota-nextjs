@@ -1,6 +1,6 @@
 export type Tab = {
   name: string;
-  value: any;
+  value: string | number | null;
 };
 
 export interface APIErrorReponse {

@@ -38,7 +38,7 @@ const IdentifyStudent = () => {
         const userId = userResponse?.data?.id;
 
         const matchingStudentClass = studentsData.find(
-          (studentClass: any) => studentClass?.student?.user?.id === userId
+          (studentClass: IStudentClass) => studentClass?.student?.user?.id === userId
         );
 
         if (matchingStudentClass) {
@@ -58,7 +58,7 @@ const IdentifyStudent = () => {
     };
 
     fetchData();
-  }, [hashId]);
+  }, [hashId, router]);
 
   return (
     <div className="p-4">
@@ -113,7 +113,7 @@ const IdentifyStudent = () => {
             </div>
 
             <div className="mt-4 grid w-full grid-cols-12 gap-4">
-              {students?.map((studentClass, key) => (
+              {students?.map((studentClass) => (
                 <StudentCard studentClass={studentClass} key={studentClass.id} />
               ))}
             </div>

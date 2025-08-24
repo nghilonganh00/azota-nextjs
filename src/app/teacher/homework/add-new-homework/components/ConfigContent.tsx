@@ -55,8 +55,10 @@ const ConfigContent: React.FC<ConfigContentProps> = (props) => {
   };
 
   useEffect(() => {
-    if (editorRef.current) onChangeText("content", editorRef.current?.getContent());
-  }, [editorRef.current?.getContent()]);
+    if (editorRef.current) {
+      onChangeText("content", editorRef.current.getContent());
+    }
+  }, [editorRef, onChangeText]);
 
   return (
     <div className="grid grid-cols-12">
@@ -102,9 +104,6 @@ const ConfigContent: React.FC<ConfigContentProps> = (props) => {
             toolbar:
               "blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
             tinycomments_mode: "embedded",
-            ai_request: (request: any, respondWith: any) =>
-              respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
-            content_style: "body { background-color: #f0f8ff; color: #333; }",
           }}
           onEditorChange={() => editorRef.current && onChangeText("homeworkContent", editorRef.current?.getContent())}
           initialValue=""

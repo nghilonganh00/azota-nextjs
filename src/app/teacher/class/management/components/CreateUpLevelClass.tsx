@@ -1,6 +1,6 @@
 "use client";
 
-import { Expand, Filter, PanelLeftClose, Plus, PlusIcon, Search, X } from "lucide-react";
+import { Expand, Filter, PanelLeftClose, PlusIcon, Search, X } from "lucide-react";
 import { Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import Popup from "@/components/Popup";

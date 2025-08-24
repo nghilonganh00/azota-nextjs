@@ -70,7 +70,7 @@ const ClassroomPopup: React.FC<ClassroomPopupProps> = (props) => {
     if (isOpenPopup) {
       fetchStudentExamAssignmentsData();
     }
-  }, [isOpenPopup]);
+  }, [isOpenPopup, classroom.id, examId]);
 
   useEffect(() => {
     if (assignedStudentIds) setAssignedStudentIdsDraft(assignedStudentIds);

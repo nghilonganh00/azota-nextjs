@@ -90,7 +90,7 @@ export const ClassroomAPI = {
       );
 
       console.log("Add class api response: ", response);
-      return response;
+      return response.data;
     } catch (error) {
       console.log("Error in ClassroomAPI: ", error);
       return {};

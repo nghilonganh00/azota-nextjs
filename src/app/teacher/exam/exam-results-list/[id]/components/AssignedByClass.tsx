@@ -39,7 +39,7 @@ const AssignedByClass: React.FC<AssignedByClassProps> = (props) => {
     };
 
     fetchResultListData();
-  }, [showedClassroom]);
+  }, [examId, showedClassroom]);
 
   return (
     <div className="rounded-md border-gray-300 bg-white p-3 pb-28 shadow-sm">
@@ -51,7 +51,7 @@ const AssignedByClass: React.FC<AssignedByClassProps> = (props) => {
       />
 
       <div className="flex items-center">
-        {showedClassGroup.classrooms?.map((classroom, key) => (
+        {showedClassGroup.classrooms?.map((classroom) => (
           <div
             className={`w-[20%] border-b-2 py-3 text-center hover:cursor-pointer ${
               showedClassroom?.id === classroom.id && "border-blue-800"

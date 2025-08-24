@@ -7,9 +7,7 @@ import { Copy, Download, FileText, PenSquare, X } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface ExamContentProps {}
-
-export const ExamContent: React.FC<ExamContentProps> = (props) => {
+export const ExamContent = () => {
   const { id: examId } = useParams<{ id: string }>();
   const [isOpenPopup, setOpenPopup] = useState<boolean>(false);
   const [exam, setExam] = useState<IExam | null>(null);
@@ -29,7 +27,7 @@ export const ExamContent: React.FC<ExamContentProps> = (props) => {
     };
 
     fetchExamContent();
-  }, []);
+  }, [examId]);
 
   return (
     <div className="space-y-2">
@@ -93,7 +91,7 @@ export const ExamContent: React.FC<ExamContentProps> = (props) => {
                           <p className="py-1 leading-relaxed">{question.topic}</p>
 
                           <ul className="mt-6 space-y-8">
-                            {question?.options.map((option, key) => (
+                            {question?.options.map((option) => (
                               <li key={question.id}>
                                 <span className="font-semibold">{option.key.toLocaleLowerCase()}. </span>
                                 {option.content}

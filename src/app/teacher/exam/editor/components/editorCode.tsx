@@ -1,6 +1,6 @@
 "use client";
 
-import { EllipsisVertical, Plus, Sigma, Upload } from "lucide-react";
+import { EllipsisVertical, Plus, Sigma } from "lucide-react";
 import { useRef } from "react";
 import AzotaEditor, { AzotaEditorHandle } from "./azotaEditor";
 import UploadFileButton from "./UploadFileButton";

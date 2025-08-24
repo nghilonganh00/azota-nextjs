@@ -6,6 +6,7 @@ import { HomeworkSubmissionAPI } from "@/lib/api/homeworkSubmission";
 import { DateTimeFormat, isoDateUtil } from "@/lib/utils/date";
 import { CalendarOff, Upload, User, X } from "lucide-react";
 import Head from "next/head";
+import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 
@@ -56,7 +57,7 @@ export default function Homework() {
     };
 
     fetchHomeworkData();
-  }, []);
+  }, [homeworkSubmissionId]);
 
   return (
     <div className="px-4 pt-6">
@@ -161,7 +162,13 @@ export default function Homework() {
                   <a href={file.link} target="_blank">
                     <div className="flex items-center gap-2 rounded-md border border-gray-200 p-2 dark:border-darkmode-400">
                       <div className="size-12 rounded-md bg-blue-400">
-                        <img src={file.link} alt={file.title} className="size-full" />
+                        <Image
+                          src={file.link}
+                          alt={file.title || "File Image"}
+                          width={800}
+                          height={600}
+                          className="w-full h-auto"
+                        />
                       </div>
                       <div className="space-y-1">
                         <div className="text-sm font-semibold">{file.title}</div>

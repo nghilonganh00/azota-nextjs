@@ -9,7 +9,7 @@ interface TakeExamAreaProps {
 }
 
 const TakeExamArea: React.FC<TakeExamAreaProps> = (props) => {
-  const { questionParts, examAnswers, setExamAnswers, exam } = props;
+  const { questionParts, examAnswers, setExamAnswers } = props;
   const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || "AZOTA-19012003-EXAM-KEY";
   console.log("encrytion key: ", ENCRYPTION_KEY);
 

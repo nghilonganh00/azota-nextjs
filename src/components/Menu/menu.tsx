@@ -1,6 +1,16 @@
 "use client";
 
-import { ArrowRightLeft, LogOut, Moon, QrCode, RefreshCcw, ScanLine, ShieldCheck, UserIcon } from "lucide-react";
+import {
+  ArrowRightLeft,
+  LogOut,
+  LucideIcon,
+  Moon,
+  QrCode,
+  RefreshCcw,
+  ScanLine,
+  ShieldCheck,
+  UserIcon,
+} from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 import UserAPI from "@/lib/api/user";
 import { TeacherAPI } from "@/lib/api/teacher";
@@ -12,7 +22,7 @@ import { IUser, UserRole } from "@/interfaces";
 import extractNameEdges from "@/lib/utils/extractNameEdges";
 
 interface MenuItemProps {
-  icon: any;
+  icon: LucideIcon;
   label: string;
   onClick?: () => void;
   to?: string;

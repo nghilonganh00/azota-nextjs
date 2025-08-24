@@ -53,7 +53,7 @@ export const MarkArea: React.FC<MarkAreaProps> = (props) => {
   const handleRequestResend = async () => {
     if (!homeworkSubmissionId) return;
 
-    const response = await HomeworkSubmissionAPI.requestResend(homeworkSubmissionId);
+    await HomeworkSubmissionAPI.requestResend(homeworkSubmissionId);
   };
 
   const handleSave = async () => {
@@ -120,9 +120,6 @@ export const MarkArea: React.FC<MarkAreaProps> = (props) => {
               toolbar_mode: "floating",
               menubar: false,
               tinycomments_mode: "embedded",
-
-              ai_request: (request: any, respondWith: any) =>
-                respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
             }}
             value={updateHomeworkSubmission?.comment}
             onEditorChange={handleComment}

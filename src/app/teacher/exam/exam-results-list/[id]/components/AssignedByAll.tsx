@@ -8,17 +8,17 @@ const AssignedByAll = () => {
 
   const [studentResults, setStudentResults] = useState<IStudentResult[]>([]);
 
-  const fetchResultListData = async () => {
-    if (examId) {
-      const response = await ExamResultAPI.getLatestByExamAndClass(examId);
-
-      setStudentResults(response?.data);
-    }
-  };
-
   useEffect(() => {
+    const fetchResultListData = async () => {
+      if (examId) {
+        const response = await ExamResultAPI.getLatestByExamAndClass(examId);
+
+        setStudentResults(response?.data);
+      }
+    };
+
     fetchResultListData();
-  }, []);
+  }, [examId]);
 
   return <StudentResultList studentResults={studentResults} />;
 };

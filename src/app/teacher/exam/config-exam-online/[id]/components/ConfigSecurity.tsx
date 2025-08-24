@@ -9,7 +9,7 @@ interface ConfigSecurityProps {
 }
 
 const ConfigSecurity: React.FC<ConfigSecurityProps> = (props) => {
-  const { examConfig, setExamConfig, handleChangeConfig } = props;
+  const { handleChangeConfig } = props;
   const [isVerifyStudent, setVerityStudent] = useState(false);
 
   return (

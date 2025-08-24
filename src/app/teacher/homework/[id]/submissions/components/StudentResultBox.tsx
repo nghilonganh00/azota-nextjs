@@ -11,7 +11,7 @@ const StudentResultBox: React.FC<StudentResultBoxProps> = (props) => {
   const router = useRouter();
 
   const { data } = props;
-  const { id, fullname, gender, phone, email, homeworkSubmissions } = data;
+  const { fullname, homeworkSubmissions } = data;
 
   const handleClickBox = () => {
     if (homeworkSubmissions.length > 0 && homeworkSubmissions[0]?.id) {

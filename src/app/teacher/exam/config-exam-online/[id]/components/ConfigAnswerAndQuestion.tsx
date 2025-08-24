@@ -9,7 +9,7 @@ interface ConfigAnswerAndQuestionProps {
 }
 
 const ConfigAnswerAndQuestion: React.FC<ConfigAnswerAndQuestionProps> = (props) => {
-  const { examConfig, setExamConfig, handleChangeConfig } = props;
+  const { examConfig, handleChangeConfig } = props;
 
   const { showAnswer, showResult } = examConfig;
 

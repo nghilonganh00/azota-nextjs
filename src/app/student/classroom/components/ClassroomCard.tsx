@@ -3,6 +3,7 @@ import HomeworkAPI from "@/lib/api/homework";
 import { CalendarCheck, Ellipsis, Newspaper, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import HomeworkCard from "./HomeworkCard";
+import Image from "next/image";
 
 export default function ClassroomCard({ classroom }: { classroom: IClassroom }) {
   const [upcomingHomeworks, setUpcomingHomeworks] = useState<IHomework[]>([]);
@@ -25,12 +26,13 @@ export default function ClassroomCard({ classroom }: { classroom: IClassroom }) 
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <img
-                className="dark:border-darkmode-400 size-9 rounded-full border border-slate-200"
-                src="https://lh3.googleusercontent.com/a/ACg8ocJ_iFoqcbXAa93XLL5ekog96hEVyxgkeCD7oenQOr3efwaZiQ=s96-c"
-                aria-describedby="cdk-describedby-message-ng-1-28"
-                cdk-describedby-host="ng-1"
-              ></img>
+              <Image
+                src={classroom.teacher.user.avatarURL}
+                alt="User Avatar"
+                width={36}
+                height={36}
+                className="dark:border-darkmode-400 rounded-full border border-slate-200"
+              />
               <div className="">
                 <div className="text-sm font-semibold">Thầy {classroom.teacher.user.fullname}</div>
                 <div className="text-xs font-semibold text-blue-800">{classroom.className}</div>

@@ -1,5 +1,5 @@
 import { IMarkedExamResult } from "@/interfaces";
-import { ChevronLeft, ChevronRight, FileClock, Trash, Trash2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, FileClock, Trash2 } from "lucide-react";
 import StudentAvatar from "../../../exam-results-list/[id]/components/StudentAvatar";
 import { DateTimeFormat, isoDateUtil } from "@/lib/utils/date";
 import HistoryExamDropdown from "./HistoryExamDropdown";

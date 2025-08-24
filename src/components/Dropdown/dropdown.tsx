@@ -1,20 +1,21 @@
 "use client";
 
+import { Tab } from "@/interfaces";
 import { Check, ChevronDown } from "lucide-react";
 import { useState, Fragment } from "react";
 
 interface DropdownProps {
   title?: string;
-  options: any;
-  selectedValue: any;
-  setSelectedValue: React.Dispatch<React.SetStateAction<any>>;
+  options: Tab[] | null;
+  selectedValue: Tab | null;
+  setSelectedValue: React.Dispatch<React.SetStateAction<Tab | null>>;
 }
 
 const Dropdown: React.FC<DropdownProps> = (props) => {
   const { title, options, selectedValue, setSelectedValue } = props;
   const [isOpen, setOpen] = useState<boolean>(false);
 
-  const handleChangeValue = (option: any) => {
+  const handleChangeValue = (option: Tab) => {
     setSelectedValue(option);
     setOpen(false);
   };
@@ -47,10 +48,10 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
                 </li>
               )}
 
-              {options.map((option: any) => {
+              {options?.map((option: Tab) => {
                 return (
                   <li
-                    key={option.id}
+                    key={option.name}
                     onClick={() => handleChangeValue(option)}
                     className={`flex items-center justify-between hover:cursor-pointer hover:bg-darkmode-700 dark:text-black ${
                       selectedValue?.value === option.value

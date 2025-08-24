@@ -94,7 +94,7 @@ const ReviewExamContent: React.FC<ReviewExamContentProps> = (props) => {
 
                     <div className="mt-6 space-y-6">
                       {options.map((option) => {
-                        const { id, key, content, isCorrect } = option;
+                        const { id, key, content } = option;
                         return (
                           <div key={id}>
                             <span className="font-semibold">{key}.</span> {content}
@@ -122,7 +122,7 @@ const ReviewExamContent: React.FC<ReviewExamContentProps> = (props) => {
                       >
                         {options
                           .sort((a, b) => (a.key > b.key ? 1 : -1))
-                          .map((option, key) => {
+                          .map((option) => {
                             return (
                               <div className="relative" key={option.id}>
                                 {answer?.[String(question.id)] === option.key && (

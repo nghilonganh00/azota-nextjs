@@ -8,7 +8,7 @@ interface ConfigTypeProp {
 }
 
 const ConfigType: React.FC<ConfigTypeProp> = (props) => {
-  const { examConfig, setExamConfig, handleChangeConfig } = props;
+  const { examConfig, handleChangeConfig } = props;
 
   const [examType, setExamType] = useState<ExamType>(examConfig.type);
 
@@ -56,9 +56,10 @@ const ConfigType: React.FC<ConfigTypeProp> = (props) => {
             </div>
           ) : (
             <div className="mt-2 text-sm/6 text-slate-500">
-              Cấu hình này thường dùng cho học sinh luyện tập. Câu hỏi được hiển thị từng câu một giống các game 'Ai là
+              {`Cấu hình này thường dùng cho học sinh luyện tập. Câu hỏi được hiển thị từng câu một giống các game '  Ai là
               triệu phú', khi trả lời tới câu hỏi nào thì học sinh sẽ nhận được đáp án đúng và lời giải của câu hỏi đó
-              luôn. <span className="text-[#f97316]">Lưu ý: Hiện chưa hỗ trợ luyện tập với câu tự luận.</span>
+              luôn.`}{" "}
+              <span className="text-[#f97316]">Lưu ý: Hiện chưa hỗ trợ luyện tập với câu tự luận.</span>
             </div>
           )}
         </div>

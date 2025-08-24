@@ -109,7 +109,7 @@ const ExamAPI = {
 
       return response;
     } catch (error) {
-      console.log("Fetch exam content failed");
+      console.log("Fetch exam content failed" + error);
       return null;
     }
   },

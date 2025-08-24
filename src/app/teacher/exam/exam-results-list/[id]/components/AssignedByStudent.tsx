@@ -19,19 +19,6 @@ const AssignedByStudent: React.FC<AssignedByStudentProps> = (props) => {
   const [showedClassroom, setShowClassroom] = useState<IClassroom | null>(null);
   const [studentResults, setStudentResults] = useState<IStudentResult[]>([]);
 
-  const fetchResultListData = async () => {
-    if (examId && showedClassroom) {
-      const response = await ExamResultAPI.getAssignedByClassLatest(examId, showedClassroom.id);
-
-      if (response && response.data) {
-        const data = response.data as IStudentResult[];
-        setStudentResults(data);
-      } else {
-        setStudentResults([]);
-      }
-    }
-  };
-
   useEffect(() => {
     if (classGroups?.length > 0) {
       setShowClassGroup(classGroups[0]);
@@ -40,8 +27,21 @@ const AssignedByStudent: React.FC<AssignedByStudentProps> = (props) => {
   }, [classGroups]);
 
   useEffect(() => {
+    const fetchResultListData = async () => {
+      if (examId && showedClassroom) {
+        const response = await ExamResultAPI.getAssignedByClassLatest(examId, showedClassroom.id);
+
+        if (response && response.data) {
+          const data = response.data as IStudentResult[];
+          setStudentResults(data);
+        } else {
+          setStudentResults([]);
+        }
+      }
+    };
+
     fetchResultListData();
-  }, [showedClassroom]);
+  }, [examId, showedClassroom]);
 
   return (
     <div className="rounded-md border-gray-300 bg-white p-3 pb-28 shadow-sm">
@@ -53,7 +53,7 @@ const AssignedByStudent: React.FC<AssignedByStudentProps> = (props) => {
       />
 
       <div className="flex items-center">
-        {showedClassGroup.classrooms?.map((classroom, key) => {
+        {showedClassGroup.classrooms?.map((classroom) => {
           const submitedStudentTotal = studentResults.map(
             (studentResult) => studentResult.classId === classroom.id
           ).length;

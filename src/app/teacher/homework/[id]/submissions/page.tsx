@@ -16,27 +16,27 @@ export default function HomeworkSubmissions() {
 
   const [homework, setHomework] = useState<IHomework>({} as IHomework);
 
-  const fetchHomework = async () => {
-    if (!homeworkId) return;
-
-    HomeworkAPI.getDetail(homeworkId).then((response) => {
-      setHomework(response.data);
-    });
-  };
-
-  const fetchSubmissions = async () => {
-    if (!homeworkId) return;
-
-    const response = await StudentClassroomAPI.getSubmissionsByHomeworkId(homeworkId);
-    if (response?.status === 200) {
-      setSubmissions(response.data);
-    }
-  };
-
   useEffect(() => {
+    const fetchHomework = async () => {
+      if (!homeworkId) return;
+
+      HomeworkAPI.getDetail(homeworkId).then((response) => {
+        setHomework(response.data);
+      });
+    };
+
+    const fetchSubmissions = async () => {
+      if (!homeworkId) return;
+
+      const response = await StudentClassroomAPI.getSubmissionsByHomeworkId(homeworkId);
+      if (response?.status === 200) {
+        setSubmissions(response.data);
+      }
+    };
+
     fetchHomework();
     fetchSubmissions();
-  }, []);
+  }, [homeworkId]);
 
   return (
     <div className="p-5">

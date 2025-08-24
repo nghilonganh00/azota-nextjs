@@ -6,7 +6,7 @@ import { History, Info } from "lucide-react";
 
 interface ConfigTimeProps {
   values: INewHomework;
-  onChange: (name: string, newValue: any) => void;
+  onChange: (name: string, newValue: string) => void;
   error: { date: string };
 }
 

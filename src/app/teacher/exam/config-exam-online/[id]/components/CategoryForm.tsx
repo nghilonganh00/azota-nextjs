@@ -9,7 +9,7 @@ interface CategoryFromProps {
   gradeId: number;
   subjectId: number;
   purposeId: number;
-  handleChangeConfig: (name: string, newValue: any) => void;
+  handleChangeConfig: (name: string, newValue: string | number | null) => void;
 }
 
 export const CategoryForm: React.FC<CategoryFromProps> = (props) => {
@@ -59,7 +59,7 @@ export const CategoryForm: React.FC<CategoryFromProps> = (props) => {
     };
 
     fetchGradePurposeData();
-  }, []);
+  }, [gradeId, purposeId, subjectId]);
 
   useEffect(() => {
     const fetchSubjectData = async () => {
@@ -73,7 +73,9 @@ export const CategoryForm: React.FC<CategoryFromProps> = (props) => {
         }));
         setSubjects(subjectsData);
 
-        gradeId !== selectedGrade.value && handleChangeConfig("subjectId", null);
+        if (gradeId !== selectedGrade.value) {
+          handleChangeConfig("subjectId", null);
+        }
 
         const preSelectdSubject = subjectsData.find((subject) => subject.value === subjectId) || null;
         setSelectedSubject(preSelectdSubject);
@@ -81,13 +83,13 @@ export const CategoryForm: React.FC<CategoryFromProps> = (props) => {
     };
 
     fetchSubjectData();
-  }, [selectedGrade]);
+  }, [selectedGrade, gradeId, handleChangeConfig, subjectId]);
 
   useEffect(() => {
-    selectedGrade && handleChangeConfig("gradeId", selectedGrade.value || null);
-    selectedSubject && handleChangeConfig("subjectId", selectedSubject.value || null);
-    selectedPurpose && handleChangeConfig("purposeId", selectedPurpose.value || null);
-  }, [selectedGrade, selectedSubject, selectedPurpose]);
+    if (selectedGrade) handleChangeConfig("gradeId", selectedGrade.value || null);
+    if (selectedSubject) handleChangeConfig("subjectId", selectedSubject.value || null);
+    if (selectedPurpose) handleChangeConfig("purposeId", selectedPurpose.value || null);
+  }, [selectedGrade, selectedSubject, selectedPurpose, handleChangeConfig]);
 
   return (
     <div className="grid grid-cols-12 gap-4">

@@ -38,7 +38,7 @@ const MarkHomework = () => {
     };
 
     fetchSubmissionData();
-  }, []);
+  }, [homeworkSubmissionId]);
 
   return (
     <div className="p-3">

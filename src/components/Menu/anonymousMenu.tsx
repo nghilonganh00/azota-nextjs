@@ -34,10 +34,13 @@ const AnonymousMenu = () => {
       onMouseEnter={() => setDropdownVisible(true)}
       onMouseLeave={() => setDropdownVisible(false)}
     >
-      <img
-        className="mat-mdc-tooltip-trigger mat-mdc-tooltip-disabled h-8 w-8 rounded-full border border-slate-200 dark:border-darkmode-400"
+      {/* <Image
         src="https://lh3.googleusercontent.com/a/ACg8ocJ_iFoqcbXAa93XLL5ekog96hEVyxgkeCD7oenQOr3efwaZiQ=s96-c"
-      ></img>
+        alt="User Avatar"
+        width={32} // h-8/w-8 = 32px
+        height={32}
+        className="rounded-full border border-slate-200 dark:border-darkmode-400"
+      /> */}
       <div>
         <div className="text-sm font-medium text-slate-800">Anonymous account</div>
         <div className="text-xs text-slate-500">Học sinh</div>

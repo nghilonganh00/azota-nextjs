@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 // import Logo from "../../../logo.svg";
-import { BookOpen, ChartNoAxesGantt, FileText, Folder, Home, House, Layers, Users, XCircle } from "lucide-react";
+import { BookOpen, ChartNoAxesGantt, FileText, Folder, House, Layers, Users, XCircle } from "lucide-react";
 import Link from "next/link";
 
 const MENU_TABS = [
@@ -40,8 +40,8 @@ export const MobileMenuBar = () => {
 
           <aside className="relative z-50 h-full w-64 bg-[rgb(var(--color-darkmode-800))]">
             <ul className="pt-2 text-white">
-              {MENU_TABS.map((tab) => (
-                <li>
+              {MENU_TABS.map((tab, index) => (
+                <li key={index}>
                   <Link href={tab.link} className="flex h-12 items-center gap-3 px-6">
                     <tab.icon strokeWidth={1.6} className="size-6" />
                     <div>{tab.title}</div>

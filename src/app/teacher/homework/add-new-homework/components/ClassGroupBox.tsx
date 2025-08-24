@@ -9,7 +9,7 @@ interface ClassGroupBoxProps {
 
 const ClassGroupBox: React.FC<ClassGroupBoxProps> = (props) => {
   const { classgroup, values, onChange } = props;
-  const { id, classgroupName, teacherId, classrooms } = classgroup;
+  const { classgroupName, classrooms } = classgroup;
 
   return (
     <div className="p-2">

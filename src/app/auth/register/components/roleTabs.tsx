@@ -1,5 +1,4 @@
 import { GraduationCap, User } from "lucide-react";
-import { newUser } from "../lib/type";
 
 interface RoleTabsProps {
   value: "STUDENT" | "TEACHER";
@@ -24,8 +23,9 @@ const RoleTabs: React.FC<RoleTabsProps> = (props) => {
 
   return (
     <div className="flex w-full items-center">
-      {ROLETABS.map((tab) => (
+      {ROLETABS.map((tab, index) => (
         <div
+          key={index}
           onClick={() => onChange(tab.value as "STUDENT" | "TEACHER")}
           className={
             "flex-1 border-b-2 py-2 hover:cursor-pointer dark:border-darkmode-600" +

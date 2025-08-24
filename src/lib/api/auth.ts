@@ -70,6 +70,7 @@ const AuthAPI = {
 
       return response;
     } catch (error) {
+      console.error(error);
       return null;
     }
   },
@@ -91,6 +92,7 @@ const AuthAPI = {
 
       return response;
     } catch (error) {
+      console.error(error);
       return null;
     }
   },
@@ -112,6 +114,7 @@ const AuthAPI = {
 
       return response;
     } catch (error) {
+      console.error(error);
       return null;
     }
   },
