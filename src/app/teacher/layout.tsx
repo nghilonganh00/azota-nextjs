@@ -9,10 +9,10 @@ import { usePathname } from "next/navigation";
 export default function TeacherLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
-  if (pathname === "/teacher/exam/editor") {
+  if (pathname === "/teacher/exam/editor/content") {
     return (
       <div className="grid h-screen grid-rows-[auto_1fr] overflow-y-hidden">
-        {/* <EditorTopBar /> */}
+        <EditorTopBar />
         <div className="scrollbar overflow-y-auto">{children}</div>
       </div>
     );

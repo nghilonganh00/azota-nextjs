@@ -37,7 +37,7 @@ export default function Homework() {
     const response = await HomeworkSubmissionAPI.submit(homeworkSubmissionId, submissionFiles);
 
     if (response?.status !== 201) {
-      addNotification("Lỗi khi nộp bài", "ERROR");
+      addNotification("Lỗi khi nộp bài ", "ERROR");
       return;
     }
 
