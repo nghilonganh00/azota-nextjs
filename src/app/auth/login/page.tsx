@@ -40,6 +40,7 @@ const Login = () => {
     if (response?.status === 200) {
       const loginData = response.data;
       if (loginData.accessToken) {
+        console.log("accToken: ", accessToken);
         setAccessToken(loginData.accessToken);
         const isTeacher = loginData.user.role === "TEACHER";
         router.push(isTeacher ? "/teacher/dashboard" : "/student/classroom");

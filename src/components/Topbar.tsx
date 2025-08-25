@@ -10,13 +10,8 @@ import Image from "next/image";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 export default function TopBar() {
-  const [accessToken, setAccessToken] = useState<string | null>(null);
-
-  const [token] = useLocalStorage<string | null>("accessToken", null);
-  useEffect(() => {
-    setAccessToken(token);
-  }, []);
-
+  const [accessToken, setAccessToken, ready] = useLocalStorage<string | null>("accessToken", null);
+  console.log("access token: ", accessToken);
   const goBack = useGoBack();
 
   useEffect(() => {
@@ -28,6 +23,8 @@ export default function TopBar() {
       }
     }
   }, [accessToken]);
+
+  if (!ready) return null;
 
   return (
     <div className="w-full border-b border-solid border-slate-200 px-4 py-4 dark:border-slate-600">
