@@ -32,9 +32,11 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
       setValue(valueToStore as T);
 
       if (valueToStore === null) {
-        localStorage.removeItem(key); // remove key if value is null
+        localStorage.removeItem(key);
+      } else if (typeof valueToStore === "string") {
+        localStorage.setItem(key, valueToStore);
       } else {
-        localStorage.setItem(key, JSON.stringify(valueToStore)); // stringify everything
+        localStorage.setItem(key, JSON.stringify(valueToStore));
       }
     } catch (error) {
       console.error(`Error setting localStorage key "${key}":`, error);
