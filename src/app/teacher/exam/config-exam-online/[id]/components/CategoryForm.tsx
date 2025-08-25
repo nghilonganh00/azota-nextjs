@@ -83,13 +83,13 @@ export const CategoryForm: React.FC<CategoryFromProps> = (props) => {
     };
 
     fetchSubjectData();
-  }, [selectedGrade, gradeId, handleChangeConfig, subjectId]);
+  }, [selectedGrade, gradeId, subjectId]);
 
   useEffect(() => {
     if (selectedGrade) handleChangeConfig("gradeId", selectedGrade.value || null);
     if (selectedSubject) handleChangeConfig("subjectId", selectedSubject.value || null);
     if (selectedPurpose) handleChangeConfig("purposeId", selectedPurpose.value || null);
-  }, [selectedGrade, selectedSubject, selectedPurpose, handleChangeConfig]);
+  }, [selectedGrade, selectedSubject, selectedPurpose]);
 
   return (
     <div className="grid grid-cols-12 gap-4">
